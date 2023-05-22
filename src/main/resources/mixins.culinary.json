@@ -1,0 +1,9 @@
+{
+  "minVersion": "0.7.11",
+  "compatibilityLevel": "JAVA_8",
+  "package": "ru.bastard.culinary.mixin",
+  "refmap": "mixins.culinary.refmap.json",
+  "mixins": [
+    "CakeBlockMixin"
+  ]
+}
