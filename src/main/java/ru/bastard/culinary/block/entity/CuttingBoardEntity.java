@@ -12,7 +12,7 @@ public class CuttingBoardEntity extends BlockEntity {
     private NonNullList<ItemStack> container = NonNullList.withSize(1, ItemStack.EMPTY);
 
     public CuttingBoardEntity(BlockPos blockPos, BlockState blockState) {
-        super(BlockEntityType.CAMPFIRE, blockPos, blockState);
+        super(ModBlockEntities.CUTTING_BOARD_ENTITY.get(), blockPos, blockState);
     }
 
     public NonNullList<ItemStack> getContainer() {

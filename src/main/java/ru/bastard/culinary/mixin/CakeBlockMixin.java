@@ -27,7 +27,7 @@ public abstract class CakeBlockMixin implements ICakeBlockMixin {
     @Override
     public Item getCakeSlice() {
         if (cakeSlice == null) {
-            cakeSlice = ModItems.BOWL_RICE.get();
+            cakeSlice = ModItems.DEFAULT_CAKE_SLICE.get();
         }
         return cakeSlice;
     }
@@ -39,8 +39,8 @@ public abstract class CakeBlockMixin implements ICakeBlockMixin {
 
     @Inject(method = "eat", at=@At("HEAD"), cancellable = true)
     private static void injectEatMethod(LevelAccessor p_51186_, BlockPos p_51187_, BlockState p_51188_, Player p_51189_, CallbackInfoReturnable<InteractionResult> cir) {
-        if (cakeSlice == null) {
-            cakeSlice = ModItems.BOWL_RICE.get();
+        if(cakeSlice == null) {
+            cakeSlice = ModItems.DEFAULT_CAKE_SLICE.get();
         }
         if (p_51189_.getItemInHand(InteractionHand.MAIN_HAND).getItem() instanceof KnifeItem) {
             int i = p_51188_.getValue(BITES);

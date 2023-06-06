@@ -24,9 +24,7 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> CUTTING_BOARD =
             registerBlock("cutting_board", () ->
-                    new CuttingBoard(BlockBehaviour.Properties.of(Material.WOOD)
-                            .strength(1F)
-                            .sound(SoundType.WOOD)));
+                    new CuttingBoard(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).noOcclusion()));
 
     /* Example to create new Cake
     public static final RegistryObject<Block> MY_CAKE =

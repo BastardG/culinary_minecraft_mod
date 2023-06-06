@@ -82,6 +82,12 @@ public class ModItems {
                     5f,
                     new Item.Properties().setNoRepair(), new Random()));
 
+    public static final RegistryObject<Item> DEFAULT_CAKE_SLICE =
+            ITEMS.register("cake_slice", () -> new CakeSlice.Builder()
+                    .foodStats(2)
+                    .saturationStats(0.4f)
+                    .properties(new Item.Properties().stacksTo(16).setNoRepair()).build());
+
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
     }

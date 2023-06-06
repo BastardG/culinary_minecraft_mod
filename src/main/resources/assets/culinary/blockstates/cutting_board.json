@@ -1,5 +1,8 @@
 {
   "variants": {
-    "": {"model":  "culinary:block/cutting_board"}
+    "facing=north": {"model": "culinary:block/cutting_board"},
+    "facing=east": {"model": "culinary:block/cutting_board", "y": 90},
+    "facing=south": {"model": "culinary:block/cutting_board", "y": 180},
+    "facing=west": {"model": "culinary:block/cutting_board", "y": 270}
   }
 }
