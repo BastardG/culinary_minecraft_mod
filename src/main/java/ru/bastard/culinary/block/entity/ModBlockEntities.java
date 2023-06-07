@@ -14,9 +14,10 @@ public class ModBlockEntities {
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES =
             DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, Culinary.MOD_ID);
 
-    public static final RegistryObject<BlockEntityType<CuttingBoardEntity>> CUTTING_BOARD_ENTITY =
+    public static final RegistryObject<BlockEntityType<CuttingBoardEntity>> CUTTING_BOARD =
             BLOCK_ENTITIES.register("cutting_board", () ->
-                    BlockEntityType.Builder.of(CuttingBoardEntity::new, ModBlocks.CUTTING_BOARD.get()).build(null));
+                BlockEntityType.Builder.of(
+                        CuttingBoardEntity::new, ModBlocks.CUTTING_BOARD.get()).build(null));
 
     public static void register(IEventBus eventBus) {
         BLOCK_ENTITIES.register(eventBus);

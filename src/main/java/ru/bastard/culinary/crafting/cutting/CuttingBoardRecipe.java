@@ -135,8 +135,7 @@ public class CuttingBoardRecipe implements Recipe<RecipeWrapper> {
         return input.test(wrapper.getItem(0));
     }
 
-    public static class Serializer implements RecipeSerializer<CuttingBoardRecipe>
-    {
+    public static class Serializer implements RecipeSerializer<CuttingBoardRecipe> {
         @Override
         public CuttingBoardRecipe fromJson(ResourceLocation recipeId, JsonObject json) {
             final String groupIn = GsonHelper.getAsString(json, "group", "");
@@ -207,5 +206,7 @@ public class CuttingBoardRecipe implements Recipe<RecipeWrapper> {
             }
             buffer.writeUtf(recipe.soundEvent);
         }
+
+
     }
 }
