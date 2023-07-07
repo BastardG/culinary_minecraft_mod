@@ -19,6 +19,8 @@ public class SaturationEffect extends MobEffect {
         super.applyEffectTick(livingEntity, amplifier);
     }
 
+
+
     @Override
     public boolean isDurationEffectTick(int p_19455_, int p_19456_) {
         return true;

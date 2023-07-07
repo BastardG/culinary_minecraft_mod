@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "culinary:wooden_knife",
+    "culinary:stone_knife",
+    "culinary:iron_knife",
+    "culinary:diamond_knife",
+    "culinary:golden_knife",
+    "culinary:netherite_knife"
+  ]
+}

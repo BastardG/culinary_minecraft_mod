@@ -1,0 +1,10 @@
+{
+  "type": "culinary:squeezing",
+  "inputItem": {
+    "item": "minecraft:sweet_berries"
+  },
+  "outputFluid": {
+    "FluidName": "minecraft:water",
+    "Amount": 25
+  }
+}

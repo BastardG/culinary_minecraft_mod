@@ -19,6 +19,11 @@ public class ModBlockEntities {
                 BlockEntityType.Builder.of(
                         CuttingBoardEntity::new, ModBlocks.CUTTING_BOARD.get()).build(null));
 
+    public static final RegistryObject<BlockEntityType<FootTubEntity>> FOOT_TUB =
+            BLOCK_ENTITIES.register("foot_tub", () ->
+                    BlockEntityType.Builder.of(
+                            FootTubEntity::new, ModBlocks.FOOT_TUB.get()).build(null));
+
     public static void register(IEventBus eventBus) {
         BLOCK_ENTITIES.register(eventBus);
     }

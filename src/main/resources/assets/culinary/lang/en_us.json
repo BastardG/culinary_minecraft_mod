@@ -1,5 +1,7 @@
 {
   "item.culinary.rice": "Rice Bowl",
+  "item.culinary.tell_me_why_music_disc": "Struggle",
+  "item.culinary.tell_me_why_music_disc.desc": "Tell Me Why (Susumu Hirasawa)",
 
   "effect.culinary.saturation_mod": "Saturation"
 }

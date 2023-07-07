@@ -1,0 +1,17 @@
+{
+  "type": "culinary:cutting",
+  "ingredients": [
+    {
+      "item": "minecraft:apple"
+    }
+  ],
+  "tool": {
+    "tag": "forge:tools/knives"
+  },
+  "result": [
+    {
+      "item": "minecraft:golden_apple"
+    }
+  ],
+  "sound": "minecraft:item.axe.strip"
+}

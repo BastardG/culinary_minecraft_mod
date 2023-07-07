@@ -3,16 +3,14 @@ package ru.bastard.culinary.block;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.TieredItem;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
@@ -24,24 +22,20 @@ import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.common.ForgeHooks;
-import net.minecraftforge.common.Tags;
-import net.minecraftforge.network.NetworkHooks;
+import net.minecraftforge.fluids.FluidStack;
 import org.jetbrains.annotations.Nullable;
-import ru.bastard.culinary.block.entity.CuttingBoardEntity;
+import ru.bastard.culinary.block.entity.FootTubEntity;
 import ru.bastard.culinary.block.entity.ModBlockEntities;
-import ru.bastard.culinary.item.KnifeItem;
+import ru.bastard.culinary.tags.ForgeTags;
+import ru.bastard.culinary.util.FluidUtil;
 
-import javax.swing.plaf.SeparatorUI;
-import java.util.stream.Stream;
-
-public class CuttingBoard extends BaseEntityBlock {
+public class FootTub extends BaseEntityBlock {
 
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 
-    private static final VoxelShape SHAPE = Block.box(0, 0, 0, 16, 1, 16);
+    private static final VoxelShape SHAPE = Block.box(0, 0, 0, 16, 16, 16);
 
-    public CuttingBoard(Properties properties) {
+    public FootTub(Properties properties) {
         super(properties);
     }
 
@@ -51,44 +45,57 @@ public class CuttingBoard extends BaseEntityBlock {
     }
 
     @Override
-    public InteractionResult use(BlockState state,
-                                 Level level,
-                                 BlockPos pos,
-                                 Player player,
-                                 InteractionHand hand,
-                                 BlockHitResult result) {
-        ItemStack held = player.getItemInHand(hand);
+    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
         BlockEntity entity = level.getBlockEntity(pos);
+        ItemStack itemInHand = player.getItemInHand(hand);
 
-        if (hand == InteractionHand.MAIN_HAND) {
+        if (entity != null) {
             if (!level.isClientSide()) {
-                if (entity instanceof CuttingBoardEntity board) {
-                    if (held.getItem() instanceof TieredItem || held.is(Items.SHEARS)) {
-                        board.processStoredItemUsingTool(held, player);
-                        return InteractionResult.SUCCESS;
-                    }
-
-                    if (!held.isEmpty()) {
-                        if (board.isEmpty()) {
-                            board.setItem(held.copyWithCount(1));
-                            held.shrink(1);
+                if (entity instanceof FootTubEntity fte) {
+                    if (hand == InteractionHand.MAIN_HAND) {
+                        if (!itemInHand.isEmpty()) {
+                            if (itemInHand.is(Items.GLASS_BOTTLE)) {
+                                FluidStack fs = fte.getFluid();
+                                InteractionResult res = fte.processStoredFluidUseBottle();
+                                if(res == InteractionResult.SUCCESS) {
+                                    itemInHand.shrink(1);
+                                    player.addItem(FluidUtil.fluidToBottlesMap.get(fs.getFluid()).getDefaultInstance());
+                                }
+                                return InteractionResult.SUCCESS;
+                            } else {
+                                int toShrink = fte.processStoredItemFromUseItem(itemInHand);
+                                if (toShrink > 0)
+                                    itemInHand.shrink(toShrink);
+                                return InteractionResult.SUCCESS;
+                            }
+                        } else if (player.hasPose(Pose.CROUCHING)) {
+                            fte.processStoredFluidToCheck(player);
                             return InteractionResult.SUCCESS;
                         } else {
-                            board.getItem();
-                            board.setItem(held.copyWithCount(1));
-                            held.shrink(1);
+                            fte.dropContents();
                             return InteractionResult.SUCCESS;
                         }
-                    } else {
-                        if (!board.isEmpty()) {
-                            board.getItem();
-                        }
-                        return InteractionResult.SUCCESS;
                     }
                 }
             }
         }
-        return InteractionResult.FAIL;
+        return InteractionResult.SUCCESS;
+    }
+
+    @Override
+    public void fallOn(Level level, BlockState state, BlockPos pos, Entity entity, float height) {
+        BlockEntity blockEntity = level.getBlockEntity(pos);
+        //todo: remove all souts
+        System.out.println("JUMPED ON FOOT TUB");
+        if (!(entity instanceof Player)) {
+            System.out.println("ENTITY ISN'T PLAYER");
+            return;
+        }
+        if (blockEntity instanceof FootTubEntity tubEntity) {
+            System.out.println("BLOCK ENTITY IS FOOT TUB, GOES TO PROCESSING");
+            tubEntity.processStoredItemFromJump();
+        }
+        super.fallOn(level, state, pos, entity, height);
     }
 
     @Nullable
@@ -112,12 +119,12 @@ public class CuttingBoard extends BaseEntityBlock {
         stateDefinitionBuilder.add(FACING);
     }
 
-    /*BLOCK ENTITY STUFF*/
+    /* ENTITY STUFF */
 
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new CuttingBoardEntity(pos, state);
+        return new FootTubEntity(pos, state);
     }
 
     @Override
@@ -129,8 +136,8 @@ public class CuttingBoard extends BaseEntityBlock {
     public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
             BlockEntity blockEntity = level.getBlockEntity(pos);
-            if (blockEntity instanceof CuttingBoardEntity) {
-                ((CuttingBoardEntity)blockEntity).drops();
+            if (blockEntity instanceof FootTubEntity) {
+                ((FootTubEntity)blockEntity).dropContents();
             }
         }
         super.onRemove(state, level, pos, newState, isMoving);
@@ -140,9 +147,7 @@ public class CuttingBoard extends BaseEntityBlock {
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state,
                                                                   BlockEntityType<T> type) {
-        return createTickerHelper(type, ModBlockEntities.CUTTING_BOARD.get(), CuttingBoardEntity::tick);
+        return createTickerHelper(type, ModBlockEntities.FOOT_TUB.get(), FootTubEntity::tick);
     }
 
 }
-
-

@@ -1,4 +1,4 @@
-package ru.bastard.culinary.crafting.cutting;
+package ru.bastard.culinary.crafting;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -8,6 +8,7 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
@@ -15,16 +16,13 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.items.wrapper.RecipeWrapper;
-import net.minecraftforge.registries.ForgeRegistry;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import ru.bastard.culinary.crafting.ModRecipeSerializers;
-import ru.bastard.culinary.crafting.ModRecipeTypes;
+import ru.bastard.culinary.Culinary;
 import ru.bastard.culinary.crafting.ingredient.ChanceResult;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.stream.Collectors;
 
 public class CuttingBoardRecipe implements Recipe<RecipeWrapper> {
@@ -93,7 +91,7 @@ public class CuttingBoardRecipe implements Recipe<RecipeWrapper> {
         return results;
     }
 
-    public List<ItemStack> rollResults(Random rand, int fortune) {
+    public List<ItemStack> rollResults(RandomSource rand, int fortune) {
         List<ItemStack> results = new ArrayList<>();
         NonNullList<ChanceResult> rollableResults = getRollableResults();
         for (ChanceResult out : rollableResults) {
@@ -125,7 +123,7 @@ public class CuttingBoardRecipe implements Recipe<RecipeWrapper> {
 
     @Override
     public RecipeType<?> getType() {
-        return ModRecipeTypes.CUTTING.get();
+        return Type.INSTANCE;
     }
 
     @Override
@@ -135,7 +133,15 @@ public class CuttingBoardRecipe implements Recipe<RecipeWrapper> {
         return input.test(wrapper.getItem(0));
     }
 
+    public static class Type implements RecipeType<CuttingBoardRecipe> {
+        private Type() {}
+        public static final Type INSTANCE = new Type();
+        public static final String ID = "cutting";
+    }
+
     public static class Serializer implements RecipeSerializer<CuttingBoardRecipe> {
+        public static final Serializer INSTANCE = new Serializer();
+        public static final ResourceLocation ID = new ResourceLocation(Culinary.MOD_ID, "cutting");
         @Override
         public CuttingBoardRecipe fromJson(ResourceLocation recipeId, JsonObject json) {
             final String groupIn = GsonHelper.getAsString(json, "group", "");
@@ -197,16 +203,14 @@ public class CuttingBoardRecipe implements Recipe<RecipeWrapper> {
 
         @Override
         public void toNetwork(FriendlyByteBuf buffer, CuttingBoardRecipe recipe) {
-            buffer.writeUtf(recipe.group);
-            recipe.input.toNetwork(buffer);
-            recipe.tool.toNetwork(buffer);
-            buffer.writeVarInt(recipe.results.size());
-            for (ChanceResult result : recipe.results) {
+            buffer.writeUtf(recipe.getGroup());
+            recipe.getIngredients().get(0).toNetwork(buffer);
+            recipe.getTool().toNetwork(buffer);
+            buffer.writeVarInt(recipe.getResults().size());
+            for (ChanceResult result : recipe.getRollableResults()) {
                 result.write(buffer);
             }
-            buffer.writeUtf(recipe.soundEvent);
+            buffer.writeUtf(recipe.getSoundEventID());
         }
-
-
     }
 }

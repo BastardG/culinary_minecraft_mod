@@ -17,9 +17,8 @@ public class KnifeItem extends SwordItem {
 
     private Random random;
 
-    public KnifeItem(Tier tier, int damageMultiplier, float attackSpeedMultiplier, Properties props, Random random) {
+    public KnifeItem(Tier tier, int damageMultiplier, float attackSpeedMultiplier, Properties props) {
         super(tier, damageMultiplier, attackSpeedMultiplier, props);
-        this.random = random;
     }
 
     @Override

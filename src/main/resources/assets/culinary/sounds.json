@@ -1,0 +1,34 @@
+{
+  "tell_me_why": {
+    "sounds": [
+      {
+        "name": "culinary:tell_me_why",
+        "stream": true
+      }
+    ]
+  },
+  "squeeze_sound": {
+    "subtitle": "sounds.culinary.foot_tub_squeeze",
+    "sounds": [
+      {
+        "name": "culinary:squeeze_sound"
+      }
+    ]
+  },
+  "squeeze_sound_2": {
+    "subtitle": "sounds.culinary.foot_tub_squeeze",
+    "sounds": [
+      {
+        "name": "culinary:squeeze_sound_2"
+      }
+    ]
+  },
+  "squeeze_sound_3": {
+    "subtitle": "sounds.culinary.foot_tub_squeeze",
+    "sounds": [
+      {
+        "name": "culinary:squeeze_sound_3"
+      }
+    ]
+  }
+}

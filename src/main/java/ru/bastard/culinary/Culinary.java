@@ -17,8 +17,11 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import ru.bastard.culinary.block.ModBlocks;
 import ru.bastard.culinary.block.entity.ModBlockEntities;
+import ru.bastard.culinary.crafting.ModRecipeSerializers;
 import ru.bastard.culinary.effect.ModEffects;
 import ru.bastard.culinary.item.ModItems;
+import ru.bastard.culinary.networking.ModMessages;
+import ru.bastard.culinary.sound.ModSounds;
 
 @Mod(ru.bastard.culinary.Culinary.MOD_ID)
 public class Culinary {
@@ -33,6 +36,8 @@ public class Culinary {
         ModBlocks.register(modEventBus);
         ModEffects.register(modEventBus);
         ModBlockEntities.register(modEventBus);
+        ModRecipeSerializers.register(modEventBus);
+        ModSounds.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
         MinecraftForge.EVENT_BUS.register(this);
@@ -41,7 +46,7 @@ public class Culinary {
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
-
+        event.enqueueWork(ModMessages::register);
     }
 
     private void addCreative(CreativeModeTabEvent.BuildContents event) {

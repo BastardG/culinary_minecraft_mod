@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "culinary:item/tell_me_why_music_disc"
+  }
+}

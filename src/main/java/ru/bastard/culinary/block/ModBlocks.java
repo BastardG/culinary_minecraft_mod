@@ -26,6 +26,10 @@ public class ModBlocks {
             registerBlock("cutting_board", () ->
                     new CuttingBoard(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).noOcclusion()));
 
+    public static final RegistryObject<Block> FOOT_TUB =
+            registerBlock("foot_tub", () ->
+                    new FootTub(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).noOcclusion()));
+
     /* Example to create new Cake
     public static final RegistryObject<Block> MY_CAKE =
             registerBlock("my_cake", () -> new ModCakeBlock(Items.ACACIA_LOG,
