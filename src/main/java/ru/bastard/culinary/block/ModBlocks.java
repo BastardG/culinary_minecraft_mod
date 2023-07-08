@@ -31,9 +31,8 @@ public class ModBlocks {
                     new FootTub(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).noOcclusion()));
 
     /* Example to create new Cake
-    public static final RegistryObject<Block> MY_CAKE =
-            registerBlock("my_cake", () -> new ModCakeBlock(Items.ACACIA_LOG,
-                    BlockBehaviour.Properties.of(Material.CAKE)));
+    public static final Block MY_CAKE = cake("my_cake", Items.SWEET_BERRY);
+    It will be named "my_cake" and when you right-click to this cake, it will be return SWEET_BERRY item
      */
     public static void register(IEventBus eventBus) {
         BLOCKS.register(eventBus);
@@ -48,6 +47,11 @@ public class ModBlocks {
     private static <T extends Block> RegistryObject<Item> registerBlockItem(
             String name, RegistryObject<T> block) {
         return ModItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
+    }
+
+    private static Block cake(String name, Item cakeSlice) {
+        return registerBlock(name,
+                () -> new ModCakeBlock(cakeSlice, BlockBehaviour.Properties.of(Material.CAKE))).get();
     }
 
 }
