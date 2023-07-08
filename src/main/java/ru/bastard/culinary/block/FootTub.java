@@ -19,21 +19,25 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.fluids.FluidStack;
 import org.jetbrains.annotations.Nullable;
 import ru.bastard.culinary.block.entity.FootTubEntity;
 import ru.bastard.culinary.block.entity.ModBlockEntities;
-import ru.bastard.culinary.tags.ForgeTags;
 import ru.bastard.culinary.util.FluidUtil;
 
 public class FootTub extends BaseEntityBlock {
 
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 
-    private static final VoxelShape SHAPE = Block.box(0, 0, 0, 16, 16, 16);
+    private static final VoxelShape INSIDE = box(2.0D, 4.0D, 2.0D, 14.0D, 16.0D, 14.0D);
+
+    private static final VoxelShape SHAPE = Shapes.join(Shapes.block(), INSIDE, BooleanOp.ONLY_FIRST);
 
     public FootTub(Properties properties) {
         super(properties);
@@ -42,6 +46,11 @@ public class FootTub extends BaseEntityBlock {
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter getter, BlockPos pos, CollisionContext colContext) {
         return SHAPE;
+    }
+
+    @Override
+    public VoxelShape getInteractionShape(BlockState state, BlockGetter getter, BlockPos pos) {
+        return INSIDE;
     }
 
     @Override
@@ -55,11 +64,11 @@ public class FootTub extends BaseEntityBlock {
                     if (hand == InteractionHand.MAIN_HAND) {
                         if (!itemInHand.isEmpty()) {
                             if (itemInHand.is(Items.GLASS_BOTTLE)) {
-                                FluidStack fs = fte.getFluid();
+                                Fluid f = fte.getFluid().getFluid();
                                 InteractionResult res = fte.processStoredFluidUseBottle();
                                 if(res == InteractionResult.SUCCESS) {
                                     itemInHand.shrink(1);
-                                    player.addItem(FluidUtil.fluidToBottlesMap.get(fs.getFluid()).getDefaultInstance());
+                                    player.addItem(FluidUtil.fluidToBottlesMap.get(f).getDefaultInstance());
                                 }
                                 return InteractionResult.SUCCESS;
                             } else {
@@ -85,14 +94,10 @@ public class FootTub extends BaseEntityBlock {
     @Override
     public void fallOn(Level level, BlockState state, BlockPos pos, Entity entity, float height) {
         BlockEntity blockEntity = level.getBlockEntity(pos);
-        //todo: remove all souts
-        System.out.println("JUMPED ON FOOT TUB");
         if (!(entity instanceof Player)) {
-            System.out.println("ENTITY ISN'T PLAYER");
             return;
         }
         if (blockEntity instanceof FootTubEntity tubEntity) {
-            System.out.println("BLOCK ENTITY IS FOOT TUB, GOES TO PROCESSING");
             tubEntity.processStoredItemFromJump();
         }
         super.fallOn(level, state, pos, entity, height);

@@ -2,8 +2,8 @@
 	"credit": "Made with Blockbench",
 	"texture_size": [64, 64],
 	"textures": {
-		"0": "block/texture",
-		"particle": "block/texture"
+		"0": "culinary:block/foot_tub",
+		"particle": "minecraft:block/oak_planks"
 	},
 	"elements": [
 		{
@@ -22,7 +22,7 @@
 		{
 			"name": "north_wall",
 			"from": [2, 1, 1],
-			"to": [14, 5, 2],
+			"to": [14, 16, 2],
 			"faces": {
 				"north": {"uv": [3, 1, 6, 2], "texture": "#0"},
 				"east": {"uv": [3, 1, 6, 2], "texture": "#0"},
@@ -35,7 +35,7 @@
 		{
 			"name": "east_wall",
 			"from": [14, 1, 2],
-			"to": [15, 5, 14],
+			"to": [15, 16, 14],
 			"faces": {
 				"north": {"uv": [4, 6.25, 4.25, 7.25], "texture": "#0"},
 				"east": {"uv": [4, 6.25, 4.25, 7.25], "texture": "#0"},
@@ -48,7 +48,7 @@
 		{
 			"name": "west_wall",
 			"from": [1, 1, 2],
-			"to": [2, 5, 14],
+			"to": [2, 16, 14],
 			"faces": {
 				"north": {"uv": [4.5, 6.25, 4.75, 7.25], "texture": "#0"},
 				"east": {"uv": [4.5, 6.25, 4.75, 7.25], "texture": "#0"},
@@ -61,7 +61,7 @@
 		{
 			"name": "sourth_wall",
 			"from": [2, 1, 14],
-			"to": [14, 5, 15],
+			"to": [14, 16, 15],
 			"faces": {
 				"north": {"uv": [6, 0, 9, 1], "texture": "#0"},
 				"east": {"uv": [6, 0, 9, 1], "texture": "#0"},

@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": {"model": "culinary:block/foot_tub"},
+    "facing=east": {"model": "culinary:block/foot_tub", "y": 90},
+    "facing=south": {"model": "culinary:block/foot_tub", "y": 180},
+    "facing=west": {"model": "culinary:block/foot_tub", "y": 270}
+  }
+}
