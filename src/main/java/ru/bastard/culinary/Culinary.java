@@ -2,9 +2,9 @@ package ru.bastard.culinary;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.mojang.logging.LogUtils;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
@@ -15,6 +15,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import org.slf4j.Logger;
 import ru.bastard.culinary.block.ModBlocks;
 import ru.bastard.culinary.block.entity.ModBlockEntities;
 import ru.bastard.culinary.crafting.ModRecipeSerializers;
@@ -28,6 +29,7 @@ public class Culinary {
 
     public static final String MOD_ID = "culinary";
     public static final Gson GSON = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
+    public static final Logger LOG = LogUtils.getLogger();
 
     public Culinary() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();

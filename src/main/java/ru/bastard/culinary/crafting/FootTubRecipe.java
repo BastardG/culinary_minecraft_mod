@@ -105,7 +105,7 @@ public class FootTubRecipe implements Recipe<SimpleContainer> {
                 FluidStack out = fbb.readFluidStack();
                 return new FootTubRecipe(res, in, out);
             } catch (Exception e) {
-                System.out.printf("\nUnnable to read recipe with id (%s) from network", res);
+                Culinary.LOG.error("\nUnnable to read recipe with id "+res+" from network", e);
                 throw e;
             }
         }

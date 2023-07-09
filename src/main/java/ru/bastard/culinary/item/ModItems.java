@@ -1,22 +1,15 @@
 package ru.bastard.culinary.item;
 
-import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.RecordItem;
 import net.minecraft.world.item.Tiers;
-import net.minecraftforge.common.ForgeTier;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import ru.bastard.culinary.Culinary;
 import ru.bastard.culinary.sound.ModSounds;
-import ru.bastard.culinary.util.FluidUtil;
-
-import java.util.Random;
 
 public class ModItems {
 
@@ -35,7 +28,7 @@ public class ModItems {
 
     public static final RegistryObject<Item> BOWL_RICE =
             ITEMS.register("bowl_rice", () -> new BowlFood(
-                    new BowlFood.Builder().prop(
+                    new TastyFood.Properties().prop(
                     new Item.Properties()
                             .stacksTo(1)
                             .food(
@@ -106,13 +99,6 @@ public class ModItems {
 
     private static RegistryObject<Item> registry(String bus, Item.Properties properties) {
         return ITEMS.register(bus, () -> new Item(properties));
-    }
-
-    private static RegistryObject<Item> squeezeOutput(String name, FluidStack fluid) {
-        //TODO: Не забыть
-        //FluidUtil.fluidToBottlesMap.put(fluid.getFluid(), );
-        // return ITEMS.register;
-        return null;
     }
 
 }

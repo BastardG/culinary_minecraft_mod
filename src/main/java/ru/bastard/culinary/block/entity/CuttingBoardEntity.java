@@ -56,7 +56,6 @@ public class CuttingBoardEntity extends BlockEntity {
         match.ifPresent(
                 recipe -> {
                     List<ItemStack> results = recipe.getResults();
-                    System.out.println(results);
                     for (ItemStack is : results) {
                         Direction direction = getBlockState().getValue(CuttingBoard.FACING).getCounterClockWise();
                         ItemEntity entity = new ItemEntity(level,

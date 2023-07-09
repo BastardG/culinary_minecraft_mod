@@ -63,7 +63,7 @@ public class FootTubEntity extends BlockEntity implements EntityInventory, Entit
     }
 
     public void processStoredFluidToCheck(Player player) {
-        player.sendSystemMessage(Component.literal("Fluid in foot tub is: "+getFluid().getRawFluid().getBucket()+"\n Amount of fluid is: " + getFluid().getAmount()));
+        player.sendSystemMessage(Component.literal("Fluid in foot tub is: "+getFluid().getRawFluid().getBucket()+"\nAmount of fluid is: " + getFluid().getAmount()));
         player.sendSystemMessage(Component.literal("Items in Foot Tub: " + getItem().getItem() + "\nCount: " + getItem().getCount()));
     }
 

@@ -15,8 +15,6 @@ import java.util.Random;
 
 public class KnifeItem extends SwordItem {
 
-    private Random random;
-
     public KnifeItem(Tier tier, int damageMultiplier, float attackSpeedMultiplier, Properties props) {
         super(tier, damageMultiplier, attackSpeedMultiplier, props);
     }
