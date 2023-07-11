@@ -101,7 +101,7 @@ public class FootTubEntity extends BlockEntity implements EntityInventory, Entit
     }
 
     public int processStoredItemFromUseItem(ItemStack itemStack) {
-        if (!itemStack.is(ForgeTags.FRUITS_SQUEEZABLE)) {
+        if (!itemStack.is(ForgeTags.SQUEEZABLE)) {
             return 0;
         }
 

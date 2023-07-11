@@ -24,6 +24,11 @@ public class ModBlockEntities {
                     BlockEntityType.Builder.of(
                             FootTubEntity::new, ModBlocks.FOOT_TUB.get()).build(null));
 
+    public static final RegistryObject<BlockEntityType<PotEntity>> POT =
+            BLOCK_ENTITIES.register("pot", () ->
+                    BlockEntityType.Builder.of(
+                            PotEntity::new, ModBlocks.POT.get()).build(null));
+
     public static void register(IEventBus eventBus) {
         BLOCK_ENTITIES.register(eventBus);
     }

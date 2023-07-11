@@ -20,6 +20,8 @@ import ru.bastard.culinary.block.ModBlocks;
 import ru.bastard.culinary.block.entity.ModBlockEntities;
 import ru.bastard.culinary.crafting.ModRecipeSerializers;
 import ru.bastard.culinary.effect.ModEffects;
+import ru.bastard.culinary.fluid.ModFluidTypes;
+import ru.bastard.culinary.fluid.ModFluids;
 import ru.bastard.culinary.item.ModItems;
 import ru.bastard.culinary.networking.ModMessages;
 import ru.bastard.culinary.sound.ModSounds;
@@ -34,6 +36,8 @@ public class Culinary {
     public Culinary() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
+        ModFluids.register(modEventBus);
+        ModFluidTypes.register(modEventBus);
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
         ModEffects.register(modEventBus);
@@ -61,7 +65,10 @@ public class Culinary {
     public static class ClientModEvents {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
+            ItemBlockRenderTypes.setRenderLayer(ModFluids.SOURCE_SUGAR_CANE_JUICE.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(ModFluids.FLOWING_SUGAR_CANE_JUICE.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.CUTTING_BOARD.get(), RenderType.translucent());
         }
     }
+
 }

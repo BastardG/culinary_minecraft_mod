@@ -13,10 +13,6 @@ public class BowlFood extends TastyFood {
         super(properties);
     }
 
-    public BowlFood(Item.Properties prop, FoodProperties foodProp) {
-        super(prop, foodProp);
-    }
-
     @Override
     public ItemStack finishUsingItem(ItemStack itemStack, Level level, LivingEntity livingEntity) {
         ItemStack is = super.finishUsingItem(itemStack, level, livingEntity);

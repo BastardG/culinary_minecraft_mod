@@ -1,14 +1,14 @@
 package ru.bastard.culinary.item;
 
 import net.minecraft.world.food.FoodProperties;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.RecordItem;
-import net.minecraft.world.item.Tiers;
+import net.minecraft.world.item.*;
+import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import ru.bastard.culinary.Culinary;
+import ru.bastard.culinary.fluid.ModFluids;
 import ru.bastard.culinary.sound.ModSounds;
 
 public class ModItems {
@@ -28,16 +28,12 @@ public class ModItems {
 
     public static final RegistryObject<Item> BOWL_RICE =
             ITEMS.register("bowl_rice", () -> new BowlFood(
-                    new TastyFood.Properties().prop(
-                    new Item.Properties()
-                            .stacksTo(1)
-                            .food(
-                                    new FoodProperties.Builder()
-                                            .nutrition(2)
-                                            .saturationMod(0.1F)
-                                            .fast()
-                                            .build())
-            ).hot().saturation(10)));
+                    new Item.Properties().stacksTo(1)
+                            .food(new FoodProperties.Builder()
+                            .saturationMod(1F)
+                            .fast()
+                            .nutrition(4)
+                            .build())));
 
     public static final RegistryObject<Item> WOODEN_KNIFE =
             ITEMS.register("wooden_knife", () -> new KnifeItem(
@@ -93,12 +89,19 @@ public class ModItems {
                     new Item.Properties().rarity(ModRarity.UNIC).stacksTo(1).fireResistant(),
                     4120));
 
+    public static final RegistryObject<Item> SUGAR_CANE_JUICE_BUCKET =
+            bucketOf("sugar_cane_juice_bucket", ModFluids.SOURCE_SUGAR_CANE_JUICE);
+
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
     }
 
     private static RegistryObject<Item> registry(String bus, Item.Properties properties) {
         return ITEMS.register(bus, () -> new Item(properties));
+    }
+
+    private static RegistryObject<Item> bucketOf(String name, RegistryObject<FlowingFluid> fluid) {
+        return ITEMS.register(name, () -> new BucketItem(fluid, new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
     }
 
 }
