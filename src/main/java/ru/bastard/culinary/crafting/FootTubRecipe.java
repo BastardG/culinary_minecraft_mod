@@ -44,7 +44,7 @@ public class FootTubRecipe implements Recipe<SimpleContainer> {
 
     @Override
     public ItemStack assemble(SimpleContainer simpleContainer) {
-        return outputFluid.getFluid().getBucket().getDefaultInstance().copy();
+        return getResultItem();
     }
 
     @Override

@@ -1,0 +1,9 @@
+{
+  "type": "culinary:pot_boiling",
+  "temperature": 100,
+  "ingredients": [],
+  "inputFluid": {"FluidName": "culinary:sugar_cane_juice_fluid", "Amount":  1000},
+  "outputFluid": {"FluidName": "culinary:molasses_fluid", "Amount": 250},
+  "itemReminder": {"item": "minecraft:sugar", "count": 10},
+  "timeAmount": 30
+}

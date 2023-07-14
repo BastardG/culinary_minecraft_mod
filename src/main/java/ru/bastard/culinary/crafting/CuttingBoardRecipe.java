@@ -20,6 +20,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import ru.bastard.culinary.Culinary;
 import ru.bastard.culinary.crafting.ingredient.ChanceResult;
+import ru.bastard.culinary.util.RecipeUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -145,7 +146,7 @@ public class CuttingBoardRecipe implements Recipe<RecipeWrapper> {
         @Override
         public CuttingBoardRecipe fromJson(ResourceLocation recipeId, JsonObject json) {
             final String groupIn = GsonHelper.getAsString(json, "group", "");
-            final NonNullList<Ingredient> inputItemsIn = readIngredients(GsonHelper.getAsJsonArray(json, "ingredients"));
+            final NonNullList<Ingredient> inputItemsIn = RecipeUtil.readIngredients(GsonHelper.getAsJsonArray(json, "ingredients"));
             final JsonObject toolObject = GsonHelper.getAsJsonObject(json, "tool");
             final Ingredient toolIn = Ingredient.fromJson(toolObject);
             if (inputItemsIn.isEmpty()) {
@@ -163,17 +164,6 @@ public class CuttingBoardRecipe implements Recipe<RecipeWrapper> {
                     return new CuttingBoardRecipe(recipeId, groupIn, inputItemsIn.get(0), toolIn, results, soundID);
                 }
             }
-        }
-
-        private static NonNullList<Ingredient> readIngredients(JsonArray ingredientArray) {
-            NonNullList<Ingredient> nonnulllist = NonNullList.create();
-            for (int i = 0; i < ingredientArray.size(); ++i) {
-                Ingredient ingredient = Ingredient.fromJson(ingredientArray.get(i));
-                if (!ingredient.isEmpty()) {
-                    nonnulllist.add(ingredient);
-                }
-            }
-            return nonnulllist;
         }
 
         private static NonNullList<ChanceResult> readResults(JsonArray resultArray) {

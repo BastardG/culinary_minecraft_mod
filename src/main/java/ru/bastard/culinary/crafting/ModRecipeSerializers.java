@@ -18,6 +18,9 @@ public class ModRecipeSerializers {
     public static final RegistryObject<RecipeSerializer<?>> SQUEEZING =
             RECIPE_SERIALIZERS.register("squeezing", () -> FootTubRecipe.Serializer.INSTANCE);
 
+    public static final RegistryObject<RecipeSerializer<?>> POT_BOILING =
+    RECIPE_SERIALIZERS.register("pot_boiling", () -> PotBoilingRecipe.Serializer.INSTANCE);
+
     public static void register(IEventBus eventBus) {
         RECIPE_SERIALIZERS.register(eventBus);
     }

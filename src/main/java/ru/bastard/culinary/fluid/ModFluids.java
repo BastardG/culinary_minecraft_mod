@@ -33,6 +33,23 @@ public class ModFluids {
                     .slopeFindDistance(1)
                     .block(ModBlocks.SUGAR_CANE_JUICE_BLOCK).bucket(ModItems.SUGAR_CANE_JUICE_BUCKET);
 
+    public static final RegistryObject<FlowingFluid> SOURCE_MOLASSES =
+            FLUIDS.register("molasses_fluid", () ->
+                    new ForgeFlowingFluid.Source(ModFluids.MOLASSES_PROPERTIES));
+
+    public static final RegistryObject<FlowingFluid> FLOWING_MOLASSES =
+            FLUIDS.register("flowing_molasses_fluid", () ->
+                    new ForgeFlowingFluid.Flowing(ModFluids.MOLASSES_PROPERTIES));
+
+    public static final ForgeFlowingFluid.Properties MOLASSES_PROPERTIES =
+            new ForgeFlowingFluid.Properties(
+                    ModFluidTypes.MOLASSES_FLUID_TYPE,
+                    SOURCE_MOLASSES,
+                    FLOWING_MOLASSES)
+                    .levelDecreasePerBlock(5)
+                    .slopeFindDistance(1)
+                    .block(ModBlocks.MOLASSES_FLUID_BLOCK).bucket(ModItems.MOLASSES_BUCKET);
+
 
     public static void register(IEventBus bus) {
         FLUIDS.register(bus);

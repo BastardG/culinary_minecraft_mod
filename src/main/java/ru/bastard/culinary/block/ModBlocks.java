@@ -39,6 +39,9 @@ public class ModBlocks {
     public static final RegistryObject<LiquidBlock> SUGAR_CANE_JUICE_BLOCK = BLOCKS.register("sugar_cane_juice_fluid_block",
             () -> new LiquidBlock(ModFluids.SOURCE_SUGAR_CANE_JUICE, BlockBehaviour.Properties.copy(Blocks.WATER)));
 
+    public static final RegistryObject<LiquidBlock> MOLASSES_FLUID_BLOCK = BLOCKS.register("molasses_fluid_block",
+            () -> new LiquidBlock(ModFluids.SOURCE_MOLASSES, BlockBehaviour.Properties.copy(Blocks.WATER)));
+
     /* Example to create new Cake
     public static final RegistryObject<Block> MY_CAKE = cake("my_cake", Items.SWEET_BERRY);
     It will be named "my_cake" and when you right-click to this cake, it will be return SWEET_BERRY item
