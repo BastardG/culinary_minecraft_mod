@@ -7,7 +7,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -15,14 +14,11 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.items.wrapper.RecipeWrapper;
 import org.jetbrains.annotations.Nullable;
 import ru.bastard.culinary.Culinary;
-import ru.bastard.culinary.util.ContainerUtil;
 import ru.bastard.culinary.util.FluidUtil;
 import ru.bastard.culinary.util.RecipeUtil;
 
-import java.util.HashSet;
 import java.util.List;
 
 public class PotBoilingRecipe implements Recipe<SimpleContainer> {
@@ -34,16 +30,16 @@ public class PotBoilingRecipe implements Recipe<SimpleContainer> {
     private final FluidStack outputFluid;
     //can be null
     private final ItemStack resultingItem;
-    private final int secondsToResult;
+    private final int ticksToResult;
 
-    public PotBoilingRecipe(ResourceLocation id, int temperature, List<Ingredient> ingredients, FluidStack inputFluid, FluidStack outputFluid, ItemStack resultingItem, int secondsToResult) {
+    public PotBoilingRecipe(ResourceLocation id, int temperature, List<Ingredient> ingredients, FluidStack inputFluid, FluidStack outputFluid, ItemStack resultingItem, int ticksToResult) {
         this.id = id;
         this.temperature = temperature;
         this.ingredients = ingredients;
         this.inputFluid = inputFluid;
         this.outputFluid = outputFluid;
         this.resultingItem = resultingItem;
-        this.secondsToResult = secondsToResult;
+        this.ticksToResult = ticksToResult;
     }
 
     //Use method with FluidStack and SimpleContainer
@@ -62,6 +58,10 @@ public class PotBoilingRecipe implements Recipe<SimpleContainer> {
             }
         }
         return true;
+    }
+
+    public boolean matches(FluidStack inputFluid) {
+        return inputFluid.isFluidEqual(this.inputFluid) && inputFluid.getAmount() == this.inputFluid.getAmount();
     }
 
     @Override
@@ -112,7 +112,7 @@ public class PotBoilingRecipe implements Recipe<SimpleContainer> {
             final FluidStack inpFl = FluidUtil.readFluid(GsonHelper.getAsJsonObject(jsonObject, "inputFluid"));
             final FluidStack outFl = FluidUtil.readFluid(GsonHelper.getAsJsonObject(jsonObject, "outputFluid"));
             final ItemStack itemRemin = CraftingHelper.getItemStack(GsonHelper.getAsJsonObject(jsonObject, "itemReminder"), false);
-            final int timeAm = GsonHelper.getAsInt(jsonObject, "timeAmount");
+            final int timeAm = GsonHelper.getAsInt(jsonObject, "ticksToResult");
             return new PotBoilingRecipe(rs, temp, ingrs, inpFl, outFl, itemRemin, timeAm);
         }
 
@@ -127,8 +127,8 @@ public class PotBoilingRecipe implements Recipe<SimpleContainer> {
             final FluidStack inpFl = fbb.readFluidStack();
             final FluidStack outFl = fbb.readFluidStack();
             final ItemStack itemRemin = fbb.readItem();
-            final int timeAm = fbb.readVarInt();
-            return new PotBoilingRecipe(rs, temp, ingrs, inpFl, outFl, itemRemin, timeAm);
+            final int ticksAm = fbb.readVarInt();
+            return new PotBoilingRecipe(rs, temp, ingrs, inpFl, outFl, itemRemin, ticksAm);
         }
 
         @Override
@@ -141,9 +141,41 @@ public class PotBoilingRecipe implements Recipe<SimpleContainer> {
             fbb.writeFluidStack(recipe.inputFluid);
             fbb.writeFluidStack(recipe.outputFluid);
             fbb.writeItem(recipe.resultingItem);
-            fbb.writeVarInt(recipe.secondsToResult);
+            fbb.writeVarInt(recipe.ticksToResult);
         }
 
     }
 
+    public int getTemperature() {
+        return temperature;
+    }
+
+    public FluidStack getInputFluid() {
+        return inputFluid;
+    }
+
+    public FluidStack getOutputFluid() {
+        return outputFluid;
+    }
+
+    public ItemStack getResultingItem() {
+        return resultingItem;
+    }
+
+    public int getTicksToResult() {
+        return ticksToResult;
+    }
+
+    @Override
+    public String toString() {
+        return "PotBoilingRecipe{" +
+                "id=" + id +
+                ", temperature=" + temperature +
+                ", ingredients=" + ingredients +
+                ", inputFluid=" + inputFluid +
+                ", outputFluid=" + outputFluid +
+                ", resultingItem=" + resultingItem +
+                ", ticksToResult=" + ticksToResult +
+                '}';
+    }
 }

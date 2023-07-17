@@ -9,11 +9,9 @@ public interface EntityInventory {
     void dropContents();
     boolean isEmpty();
     int size();
-    void setItem(ItemStack is);
-    ItemStack getItem();
-    ItemStack takeItem();
-    ItemStack takeItemWithReplace(ItemStack itemStack);
+    void setItem(int slot, ItemStack is);
+    ItemStack getItem(int slot);
     void setItemHandler(ItemStackHandler isHandler);
-    void shrink(int count);
+    void shrink(int slot, int count);
 
 }

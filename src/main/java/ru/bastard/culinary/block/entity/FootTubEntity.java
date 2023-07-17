@@ -45,7 +45,7 @@ public class FootTubEntity extends BlockEntity implements EntityInventory, Entit
     };
     private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
 
-    private FluidTank FLUID_TANK = new FluidTank(1000) {
+    private final FluidTank FLUID_TANK = new FluidTank(1000) {
         @Override
         protected void onContentsChanged() {
             ModMessages.sendToClients(new FluidSyncS2CPacket(FLUID_TANK.getFluid(), worldPosition));
@@ -64,7 +64,7 @@ public class FootTubEntity extends BlockEntity implements EntityInventory, Entit
 
     public void processStoredFluidToCheck(Player player) {
         player.sendSystemMessage(Component.literal("Fluid in foot tub is: "+getFluid().getRawFluid().getBucket()+"\nAmount of fluid is: " + getFluid().getAmount()));
-        player.sendSystemMessage(Component.literal("Items in Foot Tub: " + getItem().getItem() + "\nCount: " + getItem().getCount()));
+        player.sendSystemMessage(Component.literal("Items in Foot Tub: " + getItem(0).getItem() + "\nCount: " + getItem(0).getCount()));
     }
 
     public InteractionResult processStoredFluidUseBottle() {
@@ -83,7 +83,7 @@ public class FootTubEntity extends BlockEntity implements EntityInventory, Entit
                 playSound(rand);
                 FluidStack resultingFluid = new FluidStack(recipe.getResultingFluid(), rand * recipe.getResultingFluid().getAmount());
                 fillTank(resultingFluid);
-                shrink(rand);
+                shrink(0, rand);
             });
         }
     }
@@ -109,8 +109,8 @@ public class FootTubEntity extends BlockEntity implements EntityInventory, Entit
                 64 - size() : itemStack.getCount();
 
         if (isEmpty()) {
-            setItem(itemStack);
-        } else if (getItem().is(itemStack.getItem())) {
+            setItem(0, itemStack);
+        } else if (getItem(0).is(itemStack.getItem())) {
             add(toShrink);
         }
         return toShrink;
@@ -121,21 +121,15 @@ public class FootTubEntity extends BlockEntity implements EntityInventory, Entit
         if (level == null) return match;
 
         SimpleContainer sc = new SimpleContainer(1);
-        sc.setItem(0, getItem());
+        sc.setItem(0, getItem(0));
 
         List<FootTubRecipe> recipes = level.getRecipeManager()
                 .getAllRecipesFor(FootTubRecipe.Type.INSTANCE);
 
-        for (FootTubRecipe recipe : recipes) {
-            if (recipe.matches(getItem())) {
-                if (recipe.getResultingFluid().isFluidEqual(getFluid()) || getFluid().isEmpty()) {
-                    match = Optional.of(recipe);
-                }
-                return match;
-            }
+        if (isTankEmpty()) {
+            return recipes.stream().filter(r -> r.matches(getItem(0))).findFirst();
         }
-
-        return match;
+        return recipes.stream().filter(r -> r.matches(getItem(0), getFluid())).findFirst();
     }
 
     @Override
@@ -151,13 +145,13 @@ public class FootTubEntity extends BlockEntity implements EntityInventory, Entit
 
     @Override
     public void emptyTank() {
-        FLUID_TANK.drain(FLUID_TANK.getFluidAmount(), IFluidHandler.FluidAction.EXECUTE);
+        FLUID_TANK.setFluid(FluidStack.EMPTY);
         setChanged();
     }
 
     @Override
     public void fillTank(int amount) {
-        if (FLUID_TANK.getFluidAmount() > 0) {
+        if (!FLUID_TANK.isEmpty()) {
             FluidStack fluidStack = FLUID_TANK.getFluid().copy();
             fluidStack.setAmount(amount);
             FLUID_TANK.fill(fluidStack, IFluidHandler.FluidAction.EXECUTE);
@@ -199,59 +193,48 @@ public class FootTubEntity extends BlockEntity implements EntityInventory, Entit
     public void dropContents() {
         if (level != null) {
             SimpleContainer sc = new SimpleContainer(1);
-            sc.setItem(0, getItem());
+            sc.setItem(0, getItem(0));
             clear();
             Containers.dropContents(level, worldPosition, sc);
         }
     }
 
     @Override
+    public boolean isTankEmpty() {
+        return FLUID_TANK.isEmpty();
+    }
+
+    @Override
     public boolean isEmpty() {
-        return getItem().isEmpty();
+        return getItem(0).isEmpty();
     }
 
     @Override
     public int size() {
-        return getItem().getCount();
+        return getItem(0).getCount();
     }
 
     private void add(int amount) {
-        ItemStack copy = getItem();
+        ItemStack copy = getItem(0);
         copy.setCount(size() + amount);
-        setItem(copy);
+        setItem(0, copy);
     }
 
     @Override
-    public void shrink(int count) {
+    public void shrink(int slot, int count) {
         itemHandler.getStackInSlot(0).shrink(count);
         setChanged();
     }
 
     @Override
-    public void setItem(ItemStack is) {
-        itemHandler.setStackInSlot(0, is.copy());
+    public void setItem(int slot, ItemStack is) {
+        itemHandler.setStackInSlot(slot, is.copy());
         setChanged();
     }
 
     @Override
-    public ItemStack getItem() {
+    public ItemStack getItem(int slot) {
         return itemHandler.getStackInSlot(0).copy();
-    }
-
-    @Override
-    public ItemStack takeItem() {
-        ItemStack copy = getItem();
-        dropContents();
-        setChanged();
-        return copy;
-    }
-
-    @Override
-    public ItemStack takeItemWithReplace(ItemStack itemStack) {
-        ItemStack copy = getItem();
-        dropContents();
-        setItem(itemStack);
-        return copy;
     }
 
     @Override
