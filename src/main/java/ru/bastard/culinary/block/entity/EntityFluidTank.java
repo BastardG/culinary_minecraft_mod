@@ -12,5 +12,6 @@ public interface EntityFluidTank {
     void setFluid(FluidStack fluidStack);
     FluidStack getFluid();
     void drain(int amount);
+    int getCapacity();
 
 }

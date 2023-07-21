@@ -14,12 +14,12 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.entity.FurnaceBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -32,7 +32,7 @@ public class Pot extends BaseEntityBlock {
 
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     private static final VoxelShape INSIDE = box(2.0D, 1.0D, 2.0D, 14.0D, 16.0D, 14.0D);
-    private static final VoxelShape SHAPE = Shapes.block();
+    private static final VoxelShape SHAPE = Shapes.join(Shapes.block(), INSIDE, BooleanOp.ONLY_FIRST);
 
     public Pot(Properties properties) {
         super(properties);
@@ -87,6 +87,16 @@ public class Pot extends BaseEntityBlock {
     @Override
     public VoxelShape getShape(BlockState s, BlockGetter bg, BlockPos p, CollisionContext cc) {
         return SHAPE;
+    }
+
+    @Override
+    public RenderShape getRenderShape(BlockState state) {
+        return RenderShape.MODEL;
+    }
+
+    @Override
+    public VoxelShape getInteractionShape(BlockState blockState, BlockGetter bg, BlockPos pos) {
+        return Shapes.join(SHAPE, INSIDE, BooleanOp.AND);
     }
 
     @Nullable

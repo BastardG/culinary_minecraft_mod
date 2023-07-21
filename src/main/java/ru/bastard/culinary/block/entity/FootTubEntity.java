@@ -184,6 +184,11 @@ public class FootTubEntity extends BlockEntity implements EntityInventory, Entit
     }
 
     @Override
+    public int getCapacity() {
+        return FLUID_TANK.getCapacity();
+    }
+
+    @Override
     public void clear() {
         itemHandler.setStackInSlot(0, ItemStack.EMPTY);
         setChanged();

@@ -37,12 +37,15 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-public class PotEntity extends BlockEntity implements EntityInventory, EntityFluidTank{
+public class PotEntity extends BlockEntity implements EntityInventory, EntityFluidTank {
 
     private ItemStackHandler itemHandler = new ItemStackHandler(10) {
         @Override
         protected void onContentsChanged(int slot) {
-            ModMessages.sendToClients(new ItemStackSyncS2CPacket(this, worldPosition));
+            setChanged();
+            if (!level.isClientSide()) {
+                ModMessages.sendToClients(new ItemStackSyncS2CPacket(this, worldPosition));
+            }
         }
     };
     private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
@@ -50,7 +53,10 @@ public class PotEntity extends BlockEntity implements EntityInventory, EntityFlu
     private final FluidTank FLUID_TANK = new FluidTank(1000) {
         @Override
         protected void onContentsChanged() {
-            ModMessages.sendToClients(new FluidSyncS2CPacket(this.getFluid(), worldPosition));
+            setChanged();
+            if (!level.isClientSide()) {
+                ModMessages.sendToClients(new FluidSyncS2CPacket(this.getFluid(), worldPosition));
+            }
         }
     };
     private LazyOptional<IFluidHandler> lazyFluidHandler = LazyOptional.empty();
@@ -79,6 +85,11 @@ public class PotEntity extends BlockEntity implements EntityInventory, EntityFlu
             entity.progress = 0;
             setChanged(level, pos, state);
         }
+        ModMessages.sendToClients(new FluidSyncS2CPacket(entity.getFluid(), entity.worldPosition));
+    }
+
+    public FluidTank getFluidTank() {
+        return FLUID_TANK;
     }
 
     public void setTemperature(int temperature) {
@@ -167,7 +178,7 @@ public class PotEntity extends BlockEntity implements EntityInventory, EntityFlu
 
     @Override
     public FluidStack getFluid() {
-        return FLUID_TANK.getFluid().copy();
+        return FLUID_TANK.getFluid();
     }
 
     @Override
@@ -176,6 +187,11 @@ public class PotEntity extends BlockEntity implements EntityInventory, EntityFlu
             FLUID_TANK.drain(amount, IFluidHandler.FluidAction.EXECUTE);
             setChanged();
         }
+    }
+
+    @Override
+    public int getCapacity() {
+        return FLUID_TANK.getCapacity();
     }
 
     @Override

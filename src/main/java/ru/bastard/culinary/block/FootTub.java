@@ -121,8 +121,6 @@ public class FootTub extends BaseEntityBlock {
         stateDefinitionBuilder.add(FACING);
     }
 
-    /* ENTITY STUFF */
-
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {

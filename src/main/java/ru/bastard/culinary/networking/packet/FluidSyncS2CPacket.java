@@ -8,7 +8,9 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.network.NetworkEvent;
 import ru.bastard.culinary.block.entity.CuttingBoardEntity;
+import ru.bastard.culinary.block.entity.EntityFluidTank;
 import ru.bastard.culinary.block.entity.FootTubEntity;
+import ru.bastard.culinary.block.entity.PotEntity;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -39,6 +41,9 @@ public class FluidSyncS2CPacket {
         NetworkEvent.Context context = supplier.get();
         context.enqueueWork(() -> {
             if (Minecraft.getInstance().level.getBlockEntity(pos) instanceof FootTubEntity entity) {
+                entity.setFluid(fluidStack);
+            }
+            if (Minecraft.getInstance().level.getBlockEntity(pos) instanceof PotEntity entity) {
                 entity.setFluid(fluidStack);
             }
         });
