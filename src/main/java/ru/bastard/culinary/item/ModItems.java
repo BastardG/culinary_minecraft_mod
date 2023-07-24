@@ -1,5 +1,7 @@
 package ru.bastard.culinary.item;
 
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.material.FlowingFluid;
@@ -31,13 +33,18 @@ public class ModItems {
     */
 
     public static final RegistryObject<Item> BOWL_RICE =
-            ITEMS.register("bowl_rice", () -> new BowlFood(
-                    new Item.Properties().stacksTo(1)
-                            .food(new FoodProperties.Builder()
-                            .saturationMod(1F)
-                            .fast()
-                            .nutrition(4)
-                            .build())));
+            ITEMS.register("bowl_rice", () -> new HotFood(
+                    new HotFood.Properties()
+                            .hotTicks(10 * 20)
+                            .saturationTicks(30 * 20)
+                            .eatSound(SoundEvents.GENERIC_EAT)
+                            .reminder(Items.BOWL)
+                            .food(
+                                    new FoodProperties
+                                            .Builder()
+                                            .nutrition(4)
+                                            .saturationMod(0.1f)
+                                            .fast().build())));
 
     public static final RegistryObject<Item> WOODEN_KNIFE =
             ITEMS.register("wooden_knife", () -> new KnifeItem(

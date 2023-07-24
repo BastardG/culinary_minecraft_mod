@@ -15,10 +15,7 @@ public class ForgeTags {
     public static final TagKey<Item> TOOLS_SHOVELS = forgeItemTag("tools/shovels");
     public static final TagKey<Item> TOOLS_HOES = forgeItemTag("tools/hoes");
 
-    public static final TagKey<Item> SQUEEZABLE = forgeItemTag("squeezable");
-    public static final TagKey<Item> SQUEEZABLE_FRUITS = forgeItemTag("squeezable/fruits");
-    public static final TagKey<Item> SQUEEZABLE_BERRIES = forgeItemTag("squeezable/berries");
-    public static final TagKey<Item> SQUEEZABLE_OTHER = forgeItemTag("squeezable/other");
+    public static final TagKey<Item> SQUEEZABLE = forgeItemTag("food/squeezable");
 
     private static TagKey<Block> forgeBlockTag(String path) {
         return TagKey.create(ForgeRegistries.BLOCKS.getRegistryKey(), new ResourceLocation("forge", path));

@@ -44,7 +44,8 @@ public class ModBlocks {
 
     /* Example to create new Cake
     public static final RegistryObject<Block> MY_CAKE = cake("my_cake", Items.SWEET_BERRY);
-    It will be named "my_cake" and when you right-click to this cake, it will be return SWEET_BERRY item
+    It will be named "my_cake" and when you right-click to this cake with knife in hand,
+     it will be return SWEET_BERRY item
      */
 
     public static void register(IEventBus eventBus) {

@@ -7,6 +7,7 @@ import net.minecraftforge.fml.common.Mod;
 import ru.bastard.culinary.Culinary;
 import ru.bastard.culinary.block.entity.ModBlockEntities;
 import ru.bastard.culinary.block.entity.renderer.CuttingBoardEntityRenderer;
+import ru.bastard.culinary.block.entity.renderer.FootTubEntityRenderer;
 import ru.bastard.culinary.block.entity.renderer.PotEntityRenderer;
 
 @Mod.EventBusSubscriber(value = Dist.CLIENT, modid = Culinary.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -21,6 +22,7 @@ public class ModEventBusEvents {
         event.registerBlockEntityRenderer(ModBlockEntities.CUTTING_BOARD.get(),
                 CuttingBoardEntityRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.POT.get(), PotEntityRenderer::new);
+        event.registerBlockEntityRenderer(ModBlockEntities.FOOT_TUB.get(), FootTubEntityRenderer::new);
     }
 
 }

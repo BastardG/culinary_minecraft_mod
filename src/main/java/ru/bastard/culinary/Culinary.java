@@ -71,6 +71,7 @@ public class Culinary {
             ItemBlockRenderTypes.setRenderLayer(ModFluids.FLOWING_SUGAR_CANE_JUICE.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.CUTTING_BOARD.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.POT.get(), RenderType.solid());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.FOOT_TUB.get(), RenderType.solid());
         }
     }
 

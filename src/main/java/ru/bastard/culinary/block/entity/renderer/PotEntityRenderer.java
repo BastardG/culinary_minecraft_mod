@@ -42,7 +42,7 @@ public class PotEntityRenderer implements BlockEntityRenderer<PotEntity> {
 
         FluidStack inputFluidStack = blockEntity.getFluid();
 
-        float inputCapacity = blockEntity.getFluidTank().getCapacity();
+        float inputCapacity = blockEntity.getCapacity();
         float inputAmount = inputFluidStack.getAmount();
         float inputFluidHeight = baseOffset + (maxFluidHeight - baseOffset) * inputAmount / inputCapacity;
 

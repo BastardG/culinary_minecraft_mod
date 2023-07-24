@@ -1,0 +1,23 @@
+{
+  "item.culinary.rice": "Миска Риса",
+  "item.culinary.cake_slice": "Кусок Торта",
+
+  "item.culinary.tell_me_why_music_disc": "Struggle",
+  "item.culinary.tell_me_why_music_disc.desc": "Скажи мне почему (Сусуму Хирасава)",
+
+  "item.culinary.sugar_cane_juice_bucket": "Ведро Сока Сахарного Тростника",
+  "item.culinary.molasses_bucket": "Ведро Мелассы",
+
+  "item.culinary.wooden_knife": "Деревянный Нож",
+  "item.culinary.stone_knife": "Каменный Нож",
+  "item.culinary.golden_knife": "Золотой Нож",
+  "item.culinary.iron_knife": "Железный Нож",
+  "item.culinary.diamond_knife": "Алмазный Нож",
+  "item.culinary.netherite_knife": "Незеритовый Нож",
+
+  "block.culinary.cutting_board": "Дощечка",
+  "block.culinary.pot": "Кастрюля",
+  "block.culinary.foot_tub": "Бадья",
+
+  "effect.culinary.saturation_mod": "Насыщение"
+}

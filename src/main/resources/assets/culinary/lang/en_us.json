@@ -1,7 +1,23 @@
 {
   "item.culinary.rice": "Rice Bowl",
+  "item.culinary.cake_slice": "Cake Slice",
+
   "item.culinary.tell_me_why_music_disc": "Struggle",
   "item.culinary.tell_me_why_music_disc.desc": "Tell Me Why (Susumu Hirasawa)",
+
+  "item.culinary.sugar_cane_juice_bucket": "Sugar Cane Juice Bucket",
+  "item.culinary.molasses_bucket": "Molasses Bucket",
+
+  "item.culinary.wooden_knife": "Wooden Knife",
+  "item.culinary.stone_knife": "Stone Knife",
+  "item.culinary.golden_knife": "Golden Knife",
+  "item.culinary.iron_knife": "Iron Knife",
+  "item.culinary.diamond_knife": "Diamond Knife",
+  "item.culinary.netherite_knife": "Netherite Knife",
+
+  "block.culinary.cutting_board": "Cutting Board",
+  "block.culinary.pot": "Boiling Pot",
+  "block.culinary.foot_tub": "Foot Tub",
 
   "effect.culinary.saturation_mod": "Saturation"
 }
