@@ -32,6 +32,12 @@ public class ModItems {
             );
     */
 
+    public static final RegistryObject<Item> SUGAR_CANE_SUGAR =
+            ITEMS.register("sugar_cane_sugar", () ->
+                    new Item(new Item.Properties()
+                            .food(new FoodProperties.Builder().fast().nutrition(1).build())
+                            .stacksTo(64)));
+
     public static final RegistryObject<Item> BOWL_RICE =
             ITEMS.register("bowl_rice", () -> new HotFood(
                     new HotFood.Properties()

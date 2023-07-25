@@ -2,6 +2,7 @@ package ru.bastard.culinary.util;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.JsonOps;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -11,6 +12,7 @@ import net.minecraftforge.fluids.FluidStack;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 public class FluidUtil {
 
@@ -21,7 +23,9 @@ public class FluidUtil {
     }
 
     public static FluidStack readFluid(JsonObject jsonObject) {
-        return FluidStack.CODEC.decode(JsonOps.INSTANCE, jsonObject).result().orElseThrow().getFirst();
+        Optional<Pair<FluidStack, JsonElement>> fls =
+                FluidStack.CODEC.decode(JsonOps.INSTANCE, jsonObject).result();
+        return fls.isPresent()? fls.get().getFirst() : FluidStack.EMPTY;
     }
 
     public static JsonElement writeFluid(FluidStack stack) {

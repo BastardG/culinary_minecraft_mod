@@ -1,0 +1,9 @@
+{
+  "type": "culinary:pot_boiling",
+  "temperature": 250,
+  "ingredients": [],
+  "inputFluid": {"FluidName": "culinary:molasses_fluid", "Amount":  1000},
+  "outputFluid": {},
+  "itemReminder": {"item": "culinary:sugar_cane_sugar", "count": 32},
+  "ticksToResult": 600
+}
