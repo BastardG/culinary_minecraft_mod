@@ -1,0 +1,15 @@
+{
+  "replaceable": true,
+  "values": [
+    "culinary:wheat_dough",
+    "culinary:oat_dough",
+    "culinary:rye_dough",
+    "culinary:maize_dough",
+    "culinary:rice_dough",
+    "culinary:sorghum_dough",
+    "culinary:barley_dough",
+    "culinary:millet_dough",
+    "culinary:quinoa_dough",
+    "culinary:buckwheat_dough"
+  ]
+}

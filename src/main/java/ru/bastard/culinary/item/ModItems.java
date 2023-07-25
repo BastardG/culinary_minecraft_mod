@@ -1,11 +1,8 @@
 package ru.bastard.culinary.item;
 
-import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
-import net.minecraft.world.level.material.FlowingFluid;
-import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -14,9 +11,11 @@ import ru.bastard.culinary.Culinary;
 import ru.bastard.culinary.fluid.ModFluids;
 import ru.bastard.culinary.sound.ModSounds;
 
-import java.util.function.Supplier;
+import java.util.ArrayList;
 
 public class ModItems {
+
+    public static final ArrayList<RegistryObject<Item>> CEREALS = new ArrayList<>();
 
     public static final DeferredRegister<Item> ITEMS
             = DeferredRegister.create(ForgeRegistries.ITEMS, Culinary.MOD_ID);
@@ -111,6 +110,67 @@ public class ModItems {
 
     public static final RegistryObject<Item> MOLASSES_BUCKET = ITEMS.register("molasses_bucket",
             () -> new BucketItem(ModFluids.SOURCE_MOLASSES, new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
+
+    public static final RegistryObject<Item> WHEAT_GRAIN = grain("wheat"); // +
+    public static final RegistryObject<Item> OAT_GRAIN = grain("oat"); // +
+    public static final RegistryObject<Item> RYE_GRAIN = grain("rye"); // +
+    public static final RegistryObject<Item> MAIZE_GRAIN = grain("maize"); // +
+    public static final RegistryObject<Item> RICE_GRAIN = grain("rice"); // +
+    public static final RegistryObject<Item> SORGHUM_GRAIN = grain("sorghum");
+    public static final RegistryObject<Item> BARLEY_GRAIN = grain("barley"); // +
+    public static final RegistryObject<Item> MILLET_GRAIN = grain("millet");
+    public static final RegistryObject<Item> QUINOA_GRAIN = grain("quinoa");
+    public static final RegistryObject<Item> BUCKWHEAT_GRAIN = grain("buckwheat");
+
+    public static final RegistryObject<Item> OAT = registerSimpleCerealItem("oat");
+    public static final RegistryObject<Item> RYE = registerSimpleCerealItem("rye");
+    public static final RegistryObject<Item> MAIZE = registerSimpleCerealItem("maize");
+    public static final RegistryObject<Item> RICE = registerSimpleCerealItem("rice");
+    public static final RegistryObject<Item> SORGHUM = registerSimpleCerealItem("sorghum");
+    public static final RegistryObject<Item> BARLEY = registerSimpleCerealItem("barley");
+    public static final RegistryObject<Item> MILLET = registerSimpleCerealItem("millet");
+    public static final RegistryObject<Item> QUINOA = registerSimpleCerealItem("quinoa");
+    public static final RegistryObject<Item> BUCKWHEAT = registerSimpleCerealItem("buckwheat");
+
+    public static final RegistryObject<Item> WHEAT_FLOUR = flour("wheat");
+    public static final RegistryObject<Item> OAT_FLOUR = flour("oat");
+    public static final RegistryObject<Item> RYE_FLOUR= flour("rye");
+    public static final RegistryObject<Item> MAIZE_FLOUR = flour("maize");
+    public static final RegistryObject<Item> RICE_FLOUR = flour("rice");
+    public static final RegistryObject<Item> SORGHUM_FLOUR = flour("sorghum");
+    public static final RegistryObject<Item> BARLEY_FLOUR = flour("barley");
+    public static final RegistryObject<Item> MILLET_FLOUR = flour("millet");
+    public static final RegistryObject<Item> QUINOA_FLOUR = flour("quinoa");
+    public static final RegistryObject<Item> BUCKWHEAT_FLOUR = flour("buckwheat");
+
+    public static final RegistryObject<Item> WHEAT_DOUGH = dough("wheat");
+    public static final RegistryObject<Item> OAT_DOUGH = dough("oat");
+    public static final RegistryObject<Item> RYE_DOUGH = dough("rye");
+    public static final RegistryObject<Item> MAIZE_DOUGH = dough("maize");
+    public static final RegistryObject<Item> RICE_DOUGH = dough("rice");
+    public static final RegistryObject<Item> SORGHUM_DOUGH = dough("sorghum");
+    public static final RegistryObject<Item> BARLEY_DOUGH = dough("barley");
+    public static final RegistryObject<Item> MILLET_DOUGH = dough("millet");
+    public static final RegistryObject<Item> QUINOA_DOUGH = dough("quinoa");
+    public static final RegistryObject<Item> BUCKWHEAT_DOUGH = dough("buckwheat");
+
+    private static RegistryObject<Item> registerSimpleCerealItem(String id) {
+        var regObj = ITEMS.register(id, () -> new Item(new Item.Properties()));
+        CEREALS.add(regObj);
+        return regObj;
+    }
+
+    public static RegistryObject<Item> grain(String id) {
+        return registerSimpleCerealItem(id + "_grain");
+    }
+
+    public static RegistryObject<Item> flour(String id) {
+        return registerSimpleCerealItem(id + "_flour");
+    }
+
+    public static RegistryObject<Item> dough(String id) {
+        return registerSimpleCerealItem(id + "_dough");
+    }
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

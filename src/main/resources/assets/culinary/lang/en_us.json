@@ -1,5 +1,5 @@
 {
-  "item.culinary.rice": "Rice Bowl",
+  "item.culinary.bowl_rice": "Rice Bowl",
   "item.culinary.cake_slice": "Cake Slice",
   "item.culinary.sugar_cane_sugar": "Cane Sugar",
 
@@ -16,9 +16,54 @@
   "item.culinary.diamond_knife": "Diamond Knife",
   "item.culinary.netherite_knife": "Netherite Knife",
 
+  "item.culinary.wheat_grain": "Wheat Grain",
+  "item.culinary.oat_grain": "Oat Grain",
+  "item.culinary.rye_grain": "Rye Grain",
+  "item.culinary.maize_grain": "Maize Grain",
+  "item.culinary.rice_grain": "Rice Grain",
+  "item.culinary.sorghum_grain": "Sorghum Grain",
+  "item.culinary.barley_grain": "Barley Grain",
+  "item.culinary.millet_grain": "Millet Grain",
+  "item.culinary.quinoa_grain": "Quinoa Grain",
+  "item.culinary.buckwheat_grain": "Buckwheat Grain",
+
+  "item.culinary.oat": "Oat",
+  "item.culinary.rye": "Rye",
+  "item.culinary.maize": "Maize Corn",
+  "item.culinary.rice": "Rice",
+  "item.culinary.sorghum": "Sorghum",
+  "item.culinary.barley": "Barley",
+  "item.culinary.millet": "Millet",
+  "item.culinary.quinoa": "Quinoa",
+  "item.culinary.buckwheat": "Buckwheat",
+
+  "item.culinary.wheat_flour": "Wheat Flour",
+  "item.culinary.oat_flour": "Oat Flour",
+  "item.culinary.rye_flour": "Rye Flour",
+  "item.culinary.maize_flour": "Maize Flour",
+  "item.culinary.rice_flour": "Rice Flour",
+  "item.culinary.sorghum_flour": "Sorghum Flour",
+  "item.culinary.barley_flour": "Barley Flour",
+  "item.culinary.millet_flour": "Millet Flour",
+  "item.culinary.quinoa_flour": "Quinoa Flour",
+  "item.culinary.buckwheat_flour": "Buckwheat Flour",
+
+  "item.culinary.wheat_dough": "Wheat Dough",
+  "item.culinary.oat_dough": "Oat Flour",
+  "item.culinary.rye_dough": "Rye Dough",
+  "item.culinary.maize_dough": "Maize Dough",
+  "item.culinary.rice_dough": "Rice Dough",
+  "item.culinary.sorghum_dough": "Sorghum Dough",
+  "item.culinary.barley_dough": "Barley Dough",
+  "item.culinary.millet_dough": "Millet Dough",
+  "item.culinary.quinoa_dough": "Quinoa Dough",
+  "item.culinary.buckwheat_dough": "Buckwheat Dough",
+
   "block.culinary.cutting_board": "Cutting Board",
   "block.culinary.pot": "Boiling Pot",
   "block.culinary.foot_tub": "Foot Tub",
 
-  "effect.culinary.saturation_mod": "Saturation"
+  "effect.culinary.saturation_mod": "Saturation",
+
+  "creativemodetab.cereals_tab": "Cereals"
 }

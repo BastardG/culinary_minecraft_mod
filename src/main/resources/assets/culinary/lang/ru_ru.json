@@ -20,5 +20,7 @@
   "block.culinary.pot": "Кастрюля",
   "block.culinary.foot_tub": "Бадья",
 
-  "effect.culinary.saturation_mod": "Насыщение"
+  "effect.culinary.saturation_mod": "Насыщение",
+
+  "creativemodetab.cereals_tab": "Злаки"
 }
