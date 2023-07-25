@@ -25,7 +25,7 @@ minecraft {
 
             property 'forge.logging.console.level', 'debug'
 
-            property 'forge.enabledGameTestNamespaces', 'simple_exotics'
+            property 'forge.enabledGameTestNamespaces', 'culinary'
 
             mods {
                 culinary {
@@ -57,7 +57,7 @@ minecraft {
 
             property 'forge.logging.console.level', 'debug'
 
-            property 'forge.enabledGameTestNamespaces', 'simple_exotics'
+            property 'forge.enabledGameTestNamespaces', 'culinary'
 
             mods {
                 culinary {
@@ -73,7 +73,7 @@ minecraft {
 
             property 'forge.logging.console.level', 'debug'
 
-            args '--tweakClass', 'org.spongepowered.asm.launch.MixinTweaker', '--mixin', 'mixins.culinary.json'//'--tweakClass', 'org.spongepowered.asm.launch.MixinTweaker', '--mixin', 'mixins.culinary.json', '--mod', 'culinary', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+            args /*'--tweakClass', 'org.spongepowered.asm.launch.MixinTweaker', '--mixin', 'mixins.culinary.json',*/ '--mod', 'culinary', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
 
             mods {
                 culinary {

@@ -1,0 +1,24 @@
+// 1.19.3	2023-07-26T02:23:29.5592762	Item Models: culinary
+087f9924d37e90794dbf4aa31ac1ba0bc30ee98b assets/culinary/models/item/barley.json
+52fa0bf1791cf089a5f5290bdbe84f575400798c assets/culinary/models/item/barley_dough.json
+ea0d94b4476937519b1d704483267ea1fc443abd assets/culinary/models/item/barley_flour.json
+caf85239a0a5863815ec14c72ae5d5c2ff0dc165 assets/culinary/models/item/barley_grain.json
+381c25404cc551c93264033227a0000d3f6dbfbd assets/culinary/models/item/maize.json
+50b33fcb78e52b15891ee546be9eecc82f4a6388 assets/culinary/models/item/maize_dough.json
+12f09908da400e2246f54f277ed4d45a88674bd8 assets/culinary/models/item/maize_flour.json
+df47f4b7f976a4042e03dfda722d7a010da0f277 assets/culinary/models/item/maize_grain.json
+7edf5385fee5402252ab9f241c9846d3ba5e36b0 assets/culinary/models/item/oat.json
+1eb61dea74132511ceaaeb8ebe7d556dbf0271b1 assets/culinary/models/item/oat_dough.json
+4e97a7ce285d9b1b9f3c1d899dd2bc3bf5c97184 assets/culinary/models/item/oat_flour.json
+6067b68d6e372a887f51695f42f3cc829f1c941e assets/culinary/models/item/oat_grain.json
+9cc0b93835f49121727ac978c3b84414e55f3fbc assets/culinary/models/item/rice.json
+e76d3d18b173c659154b833f5b7bfb720e31b084 assets/culinary/models/item/rice_dough.json
+52c0bbdaed9fd2b7d382ed7c0f5ca0d5403d9357 assets/culinary/models/item/rice_flour.json
+96d3b9266d262b604d327b0124c8d839a62ac629 assets/culinary/models/item/rice_grain.json
+76eeaf70acd01b081f9c9461b23c5ef96013dc57 assets/culinary/models/item/rye.json
+30f67b0a0a63949ca1e6d38a1c376aae2c5e9b8f assets/culinary/models/item/rye_dough.json
+76fa3eb8733bc8c935194b8167440a6f10e69de8 assets/culinary/models/item/rye_flour.json
+fbb8e87eb0c28028a64b319df18ca33593e3de11 assets/culinary/models/item/rye_grain.json
+7b87048376dda63c5db458f7f1dbfa1e0c68e9af assets/culinary/models/item/wheat_dough.json
+e23d0da0020484536255b9b502d90ad414699dfe assets/culinary/models/item/wheat_flour.json
+09f3e2621d739e1da3bc212815e74a993e6d34a7 assets/culinary/models/item/wheat_grain.json
