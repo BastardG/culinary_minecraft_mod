@@ -54,18 +54,22 @@ public class HotFood extends Item {
     @Override
     public void inventoryTick(ItemStack itemStack, Level level, Entity entity, int p_41407_, boolean isComplex) {
         super.inventoryTick(itemStack, level, entity, p_41407_, isComplex);
-        if (itemStack.getItem() instanceof HotFood) {
-            if (itemStack.getTag().getBoolean("hot")) {
-                removeOrUpdate(itemStack);
+        if (itemStack.getTag() != null) {
+            if (itemStack.getItem() instanceof HotFood) {
+                if (itemStack.getTag().getBoolean("hot")) {
+                    removeOrUpdate(itemStack);
+                }
             }
         }
     }
 
     @Override
     public boolean onEntityItemUpdate(ItemStack itemStack, ItemEntity entity) {
-        if (itemStack.getItem() instanceof HotFood) {
-            if (itemStack.getTag().getBoolean("hot")) {
-                removeOrUpdate(itemStack);
+        if (itemStack.getTag() != null) {
+            if (itemStack.getItem() instanceof HotFood) {
+                if (itemStack.getTag().getBoolean("hot")) {
+                    removeOrUpdate(itemStack);
+                }
             }
         }
         return super.onEntityItemUpdate(itemStack, entity);
