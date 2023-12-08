@@ -1,1 +1,13 @@
-// 1.19.3	2023-07-26T02:23:29.557279	Recipes
+// 1.19.3	2023-07-26T19:33:12.1799503	Recipes
+2c811b66ff0e1e2ab4c60d7974a42463a06e1afe data/culinary/advancements/recipes/tools/diamond_knife.json
+1e02b3fcd97a418ff1dcba2770f0003fdf8229d3 data/culinary/advancements/recipes/tools/golden_knife.json
+4362edff247f6d044e1955144fdffb446e02c763 data/culinary/advancements/recipes/tools/iron_knife.json
+def492f6141fe8d19e24791cfbc68abedc22e143 data/culinary/advancements/recipes/tools/stone_knife.json
+0f870f380ea7a34dfa9365e224f6e70e16ba869a data/culinary/advancements/recipes/tools/wooden_knife.json
+033199a34abf6d0353d29b7dcf24485f41b9791d data/culinary/recipes/diamond_knife.json
+c2de18cfc9b3292f1ffc05cd17c58443e90081d4 data/culinary/recipes/golden_knife.json
+7781c1e9efd2b81cff9e0abb10ac5ac62ae22fda data/culinary/recipes/iron_knife.json
+d4fbc45c656b9d674cd5b77947567bb2429c6f56 data/culinary/recipes/stone_knife.json
+0efbb7797967b3e3d263674b1c8050068a3b6600 data/culinary/recipes/wooden_knife.json
+0e8084f231532db804f5d418c7638801ee2fe501 data/minecraft/advancements/recipes/tools/netherite_knife_smithing.json
+09fdbba5f43482970aaf45731007f00eaa523246 data/minecraft/recipes/netherite_knife_smithing.json

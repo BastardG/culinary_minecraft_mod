@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "culinary:oat_chocolate_cookie_dough"
+  },
+  "result": {
+    "count": 8,
+    "item": "minecraft:cookie"
+  },
+  "experience": 0.3,
+  "cookingtime": 200
+}

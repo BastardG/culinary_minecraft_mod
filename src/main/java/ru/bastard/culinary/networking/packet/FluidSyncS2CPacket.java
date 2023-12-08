@@ -41,10 +41,10 @@ public class FluidSyncS2CPacket {
         NetworkEvent.Context context = supplier.get();
         context.enqueueWork(() -> {
             if (Minecraft.getInstance().level.getBlockEntity(pos) instanceof FootTubEntity entity) {
-                entity.setFluid(fluidStack);
+                entity.setFluid(0, fluidStack);
             }
             if (Minecraft.getInstance().level.getBlockEntity(pos) instanceof PotEntity entity) {
-                entity.setFluid(fluidStack);
+                entity.setFluid(0, fluidStack);
             }
         });
         return true;

@@ -111,6 +111,9 @@ public class ModItems {
     public static final RegistryObject<Item> MOLASSES_BUCKET = ITEMS.register("molasses_bucket",
             () -> new BucketItem(ModFluids.SOURCE_MOLASSES, new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
 
+    public static final RegistryObject<Item> HONEY_BUCKET = ITEMS.register("honey_bucket",
+            () -> new BucketItem(ModFluids.SOURCE_HONEY, new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
+
     public static final RegistryObject<Item> WHEAT_GRAIN = grain("wheat"); // +
     public static final RegistryObject<Item> OAT_GRAIN = grain("oat"); // +
     public static final RegistryObject<Item> RYE_GRAIN = grain("rye"); // +
@@ -153,6 +156,14 @@ public class ModItems {
     public static final RegistryObject<Item> MILLET_DOUGH = dough("millet");
     public static final RegistryObject<Item> QUINOA_DOUGH = dough("quinoa");
     public static final RegistryObject<Item> BUCKWHEAT_DOUGH = dough("buckwheat");
+
+    public static final RegistryObject<Item> CAKE_CRUST = registerSimpleItem("cake_crust");
+    public static final RegistryObject<Item> OAT_CHOCOLATE_COOKIE_DOUGH = registerSimpleItem("oat_chocolate_cookie_dough");
+    //public static final RegistryObject<Item> OAT = registerSimpleItem("cake_crust");
+
+    private static RegistryObject<Item> registerSimpleItem(String id) {
+        return ITEMS.register(id, () -> new Item(new Item.Properties()));
+    }
 
     private static RegistryObject<Item> registerSimpleCerealItem(String id) {
         var regObj = ITEMS.register(id, () -> new Item(new Item.Properties()));

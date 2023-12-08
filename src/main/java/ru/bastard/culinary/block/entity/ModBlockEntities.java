@@ -6,6 +6,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import ru.bastard.culinary.Culinary;
+import ru.bastard.culinary.block.FermentingBarrel;
 import ru.bastard.culinary.block.ModBlocks;
 
 public class ModBlockEntities {
@@ -27,6 +28,11 @@ public class ModBlockEntities {
             BLOCK_ENTITIES.register("pot", () ->
                     BlockEntityType.Builder.of(
                             PotEntity::new, ModBlocks.POT.get()).build(null));
+
+    public static final RegistryObject<BlockEntityType<FermentingBarrelEntity>> FERMENTING_BARREL =
+            BLOCK_ENTITIES.register("fermenting_barrel", () ->
+               BlockEntityType.Builder.of(
+                       FermentingBarrelEntity::new, ModBlocks.FERMENTING_BARREL.get()).build(null));
 
     public static void register(IEventBus eventBus) {
         BLOCK_ENTITIES.register(eventBus);

@@ -63,26 +63,26 @@ public class FootTubEntity extends BlockEntity implements EntityInventory, Entit
     }
 
     public void processStoredFluidToCheck(Player player) {
-        player.sendSystemMessage(Component.literal("Fluid in foot tub is: "+getFluid().getRawFluid().getBucket()+"\nAmount of fluid is: " + getFluid().getAmount()));
+        player.sendSystemMessage(Component.literal("Fluid in foot tub is: "+getFluid(0).getRawFluid().getBucket()+"\nAmount of fluid is: " + getFluid(0).getAmount()));
         player.sendSystemMessage(Component.literal("Items in Foot Tub: " + getItem(0).getItem() + "\nCount: " + getItem(0).getCount()));
     }
 
     public InteractionResult processStoredFluidUseBottle() {
         if (FLUID_TANK.getFluidAmount() >= 250) {
-            drain(250);
+            drain(0, 250);
             return InteractionResult.SUCCESS;
         }
         return InteractionResult.FAIL;
     }
 
     public void processStoredItemFromJump() {
-        if (size() > 0 && getFluid().getAmount() < 1000) {
+        if (size() > 0 && getFluid(0).getAmount() < 1000) {
             Optional<FootTubRecipe> match = getMatchingRecipe();
             match.ifPresent((recipe) -> {
                 int rand = Math.min((int)(1 + Math.random() * 3), size());
                 playSound(rand);
                 FluidStack resultingFluid = new FluidStack(recipe.getResultingFluid(), rand * recipe.getResultingFluid().getAmount());
-                fillTank(resultingFluid);
+                fillTank(0, resultingFluid);
                 shrink(0, rand);
             });
         }
@@ -126,31 +126,36 @@ public class FootTubEntity extends BlockEntity implements EntityInventory, Entit
         List<FootTubRecipe> recipes = level.getRecipeManager()
                 .getAllRecipesFor(FootTubRecipe.Type.INSTANCE);
 
-        if (isTankEmpty()) {
+        if (isTanksEmpty()) {
             return recipes.stream().filter(r -> r.matches(getItem(0))).findFirst();
         }
-        return recipes.stream().filter(r -> r.matches(getItem(0), getFluid())).findFirst();
+        return recipes.stream().filter(r -> r.matches(getItem(0), getFluid(0))).findFirst();
     }
 
     @Override
-    public void setFluid(FluidStack fluidStack) {
+    public void setFluid(int tankId, FluidStack fluidStack) {
         FLUID_TANK.setFluid(fluidStack);
         setChanged();
     }
 
     @Override
-    public FluidStack getFluid() {
+    public FluidStack getFluid(int tankId) {
         return FLUID_TANK.getFluid();
     }
 
     @Override
-    public void emptyTank() {
+    public void emptyTanks() {
         FLUID_TANK.setFluid(FluidStack.EMPTY);
         setChanged();
     }
 
     @Override
-    public void fillTank(int amount) {
+    public void emptyTank(int tankId) {
+        emptyTanks();
+    }
+
+    @Override
+    public void fillTank(int tankId, int amount) {
         if (!FLUID_TANK.isEmpty()) {
             FluidStack fluidStack = FLUID_TANK.getFluid().copy();
             fluidStack.setAmount(amount);
@@ -160,7 +165,7 @@ public class FootTubEntity extends BlockEntity implements EntityInventory, Entit
     }
 
     @Override
-    public void fillTank(FluidStack fluidStack) {
+    public void fillTank(int tankId, FluidStack fluidStack) {
         if (FLUID_TANK.getFluidAmount() < 1000) {
             FLUID_TANK.fill(fluidStack, IFluidHandler.FluidAction.EXECUTE);
             setChanged();
@@ -168,7 +173,7 @@ public class FootTubEntity extends BlockEntity implements EntityInventory, Entit
     }
 
     @Override
-    public void fillTankFull(FluidStack fluidStack) {
+    public void fillTankFull(int tankId, FluidStack fluidStack) {
         if (FLUID_TANK.isEmpty()) {
             FluidStack fluidStackCopy = fluidStack.copy();
             fluidStackCopy.setAmount(1000);
@@ -178,13 +183,13 @@ public class FootTubEntity extends BlockEntity implements EntityInventory, Entit
     }
 
     @Override
-    public void drain(int amount) {
+    public void drain(int tankId, int amount) {
         FLUID_TANK.drain(amount, IFluidHandler.FluidAction.EXECUTE);
         setChanged();
     }
 
     @Override
-    public int getCapacity() {
+    public int getCapacity(int tankId) {
         return FLUID_TANK.getCapacity();
     }
 
@@ -205,8 +210,13 @@ public class FootTubEntity extends BlockEntity implements EntityInventory, Entit
     }
 
     @Override
-    public boolean isTankEmpty() {
+    public boolean isTanksEmpty() {
         return FLUID_TANK.isEmpty();
+    }
+
+    @Override
+    public boolean isTankEmpty(int tankId) {
+        return isTanksEmpty();
     }
 
     @Override

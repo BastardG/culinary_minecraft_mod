@@ -36,13 +36,13 @@ public class PotEntityRenderer implements BlockEntityRenderer<PotEntity> {
 
     @Override
     public void render(PotEntity blockEntity, float partialTick, PoseStack poseStack, MultiBufferSource multiBufferSource, int light, int overlay) {
-        if (blockEntity.isTankEmpty()) return;
+        if (blockEntity.isTanksEmpty()) return;
         float baseOffset = 4.0F / 16F;
         float maxFluidHeight = 15.0F / 16F;
 
-        FluidStack inputFluidStack = blockEntity.getFluid();
+        FluidStack inputFluidStack = blockEntity.getFluid(0);
 
-        float inputCapacity = blockEntity.getCapacity();
+        float inputCapacity = blockEntity.getCapacity(0);
         float inputAmount = inputFluidStack.getAmount();
         float inputFluidHeight = baseOffset + (maxFluidHeight - baseOffset) * inputAmount / inputCapacity;
 

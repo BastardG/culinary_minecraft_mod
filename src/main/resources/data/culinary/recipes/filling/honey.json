@@ -1,0 +1,13 @@
+{
+  "type": "culinary:filling",
+  "fluid": {
+    "FluidName": "culinary:honey",
+    "Amount": 1000
+  },
+  "bottleItem": {
+    "item": "minecraft:honey_bottle"
+  },
+  "bucketItem": {
+    "item": "culinary:honey_bucket"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "group": "knifes",
+  "key": {
+    "S": {
+      "item": "minecraft:stick"
+    },
+    "W": {
+      "item": "minecraft:cobblestone"
+    }
+  },
+  "pattern": [
+    " W",
+    "S "
+  ],
+  "result": {
+    "item": "culinary:stone_knife"
+  }
+}

@@ -16,12 +16,6 @@ import java.util.Optional;
 
 public class FluidUtil {
 
-    public static Map<Fluid, Item> fluidToBottlesMap = new HashMap<>();
-
-    static {
-        fluidToBottlesMap.put(Fluids.WATER, Items.POTION);
-    }
-
     public static FluidStack readFluid(JsonObject jsonObject) {
         Optional<Pair<FluidStack, JsonElement>> fls =
                 FluidStack.CODEC.decode(JsonOps.INSTANCE, jsonObject).result();

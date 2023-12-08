@@ -2,7 +2,6 @@ package ru.bastard.culinary.block;
 
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LiquidBlock;
@@ -36,11 +35,19 @@ public class ModBlocks {
             registerBlock("pot", () ->
                     new Pot(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).noOcclusion()));
 
+    public static final RegistryObject<Block> FERMENTING_BARREL =
+            registerBlock("fermenting_barrel", () ->
+                    new FermentingBarrel(BlockBehaviour.Properties.copy(Blocks.OAK_LOG).noOcclusion()));
+
     public static final RegistryObject<LiquidBlock> SUGAR_CANE_JUICE_BLOCK = BLOCKS.register("sugar_cane_juice_fluid_block",
             () -> new LiquidBlock(ModFluids.SOURCE_SUGAR_CANE_JUICE, BlockBehaviour.Properties.copy(Blocks.WATER)));
 
     public static final RegistryObject<LiquidBlock> MOLASSES_FLUID_BLOCK = BLOCKS.register("molasses_fluid_block",
             () -> new LiquidBlock(ModFluids.SOURCE_MOLASSES, BlockBehaviour.Properties.copy(Blocks.WATER)));
+
+    public static final RegistryObject<LiquidBlock> HONEY_FLUID_BLOCK = BLOCKS.register("honey_fluid_block",
+            () -> new LiquidBlock(ModFluids.SOURCE_HONEY,
+                    BlockBehaviour.Properties.copy(Blocks.WATER).sound(SoundType.HONEY_BLOCK)));
 
     /* Example to create new Cake
     public static final RegistryObject<Block> MY_CAKE = cake("my_cake", Items.SWEET_BERRY);

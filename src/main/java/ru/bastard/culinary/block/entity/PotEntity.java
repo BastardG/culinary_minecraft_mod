@@ -70,7 +70,7 @@ public class PotEntity extends BlockEntity implements EntityInventory, EntityFlu
 
     public static void tick(Level level, BlockPos pos, BlockState state, PotEntity entity) {
         if (level.isClientSide()) return;
-        if (entity.isTankEmpty()) return;
+        if (entity.isTanksEmpty()) return;
         if (entity.temperature == 0) return;
         Optional<PotBoilingRecipe> optionalOfRecipe = entity.getMatchingRecipe();
         if (optionalOfRecipe.isPresent()) {
@@ -85,7 +85,7 @@ public class PotEntity extends BlockEntity implements EntityInventory, EntityFlu
             entity.progress = 0;
             setChanged(level, pos, state);
         }
-        ModMessages.sendToClients(new FluidSyncS2CPacket(entity.getFluid(), entity.worldPosition));
+        ModMessages.sendToClients(new FluidSyncS2CPacket(entity.getFluid(0), entity.worldPosition));
     }
 
     public FluidTank getFluidTank() {
@@ -126,26 +126,31 @@ public class PotEntity extends BlockEntity implements EntityInventory, EntityFlu
     private void craft(PotBoilingRecipe recipe) {
         ItemStack result = recipe.getResultItem();
         clear();
-        emptyTank();
+        emptyTanks();
         if (!(result.getItem() instanceof BucketItem || result.getItem() instanceof MilkBucketItem)) {
             setItem(0, result);
             dropContents();
         }
-        fillTank(recipe.getOutputFluid());
+        fillTank(0, recipe.getOutputFluid());
         this.progress = 0;
         setChanged();
     }
 
     @Override
-    public void emptyTank() {
-        setFluid(FluidStack.EMPTY);
+    public void emptyTanks() {
+        setFluid(0, FluidStack.EMPTY);
         setChanged();
     }
 
     @Override
-    public void fillTank(int amount) {
+    public void emptyTank(int tankId) {
+
+    }
+
+    @Override
+    public void fillTank(int tankId, int amount) {
         if (!FLUID_TANK.isEmpty()) {
-            FluidStack currentFluidStack = getFluid().copy();
+            FluidStack currentFluidStack = getFluid(0).copy();
             currentFluidStack.setAmount(amount);
             FLUID_TANK.fill(currentFluidStack, IFluidHandler.FluidAction.EXECUTE);
             setChanged();
@@ -153,7 +158,7 @@ public class PotEntity extends BlockEntity implements EntityInventory, EntityFlu
     }
 
     @Override
-    public void fillTank(FluidStack fluidStack) {
+    public void fillTank(int tankId, FluidStack fluidStack) {
         if (FLUID_TANK.getFluidAmount() < 1000) {
             FLUID_TANK.fill(fluidStack, IFluidHandler.FluidAction.EXECUTE);
             setChanged();
@@ -161,8 +166,8 @@ public class PotEntity extends BlockEntity implements EntityInventory, EntityFlu
     }
 
     @Override
-    public void fillTankFull(FluidStack fluidStack) {
-        if (FLUID_TANK.getFluidAmount() < 1000 && getFluid().isFluidEqual(fluidStack)) {
+    public void fillTankFull(int tankId, FluidStack fluidStack) {
+        if (FLUID_TANK.getFluidAmount() < 1000 && getFluid(0).isFluidEqual(fluidStack)) {
             FluidStack copy = fluidStack.copy();
             copy.setAmount(1000);
             FLUID_TANK.fill(copy, IFluidHandler.FluidAction.EXECUTE);
@@ -171,26 +176,26 @@ public class PotEntity extends BlockEntity implements EntityInventory, EntityFlu
     }
 
     @Override
-    public void setFluid(FluidStack fluidStack) {
+    public void setFluid(int tankId, FluidStack fluidStack) {
         FLUID_TANK.setFluid(fluidStack);
         setChanged();
     }
 
     @Override
-    public FluidStack getFluid() {
+    public FluidStack getFluid(int tankId) {
         return FLUID_TANK.getFluid();
     }
 
     @Override
-    public void drain(int amount) {
-        if (getFluid().getAmount() > 0) {
+    public void drain(int tankId, int amount) {
+        if (getFluid(0).getAmount() > 0) {
             FLUID_TANK.drain(amount, IFluidHandler.FluidAction.EXECUTE);
             setChanged();
         }
     }
 
     @Override
-    public int getCapacity() {
+    public int getCapacity(int tankId) {
         return FLUID_TANK.getCapacity();
     }
 
@@ -213,8 +218,13 @@ public class PotEntity extends BlockEntity implements EntityInventory, EntityFlu
     }
 
     @Override
-    public boolean isTankEmpty() {
+    public boolean isTanksEmpty() {
         return FLUID_TANK.isEmpty();
+    }
+
+    @Override
+    public boolean isTankEmpty(int tankId) {
+        return isTanksEmpty();
     }
 
     @Override

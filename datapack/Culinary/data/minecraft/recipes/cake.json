@@ -6,17 +6,20 @@
       "item": "minecraft:milk_bucket"
     },
     "B": {
-      "item": "forge:food/sugars"
+      "tag": "forge:food/sugars"
     },
     "C": {
-      "item": "minecraft:wheat"
+      "item": "culinary:cake_crust"
+    },
+    "D": {
+      "tag": "forge:food/berries"
     },
     "E": {
       "item": "minecraft:egg"
     }
   },
   "pattern": [
-    "AAA",
+    "ADA",
     "BEB",
     "CCC"
   ],

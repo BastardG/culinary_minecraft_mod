@@ -1,5 +1,6 @@
 package ru.bastard.culinary.crafting;
 
+import it.unimi.dsi.fastutil.ints.Int2BooleanAVLTreeMap;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -20,6 +21,12 @@ public class ModRecipeSerializers {
 
     public static final RegistryObject<RecipeSerializer<?>> POT_BOILING =
     RECIPE_SERIALIZERS.register("pot_boiling", () -> PotBoilingRecipe.Serializer.INSTANCE);
+
+    public static final RegistryObject<RecipeSerializer<?>> FILLING =
+            RECIPE_SERIALIZERS.register("filling", () -> FillRecipe.Serializer.INSTANCE);
+
+    public static final RegistryObject<RecipeSerializer<?>> FERMENTING =
+            RECIPE_SERIALIZERS.register("fermenting", () -> FermentingRecipe.Serializer.INSTANCE);
 
     public static void register(IEventBus eventBus) {
         RECIPE_SERIALIZERS.register(eventBus);

@@ -41,6 +41,17 @@ public class ModFluidTypes {
                             .canDrown(true)
                             .pathType(BlockPathTypes.DANGER_OTHER));
 
+    public static final RegistryObject<FluidType> HONEY_FLUID_TYPE = registryFluid("honey_fluid_type",
+            new Properties().tintColor(0xD1CE1F).fogColor(new Vector3f(209f/255f, 206f/255f, 31f/255f)),
+            FluidType.Properties.create()
+                    .canPushEntity(false)
+                    .canSwim(false)
+                    .density(10000)
+                    .viscosity(30000)
+                    .supportsBoating(false)
+                    .canDrown(true)
+                    .pathType(BlockPathTypes.DANGER_OTHER));
+
     private static RegistryObject<FluidType> registryFluid(String name, Properties properties, FluidType.Properties propertiesFluidType) {
         return FLUID_TYPES.register(name, () ->
                 new BaseFluidType(

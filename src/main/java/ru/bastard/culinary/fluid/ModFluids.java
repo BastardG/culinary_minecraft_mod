@@ -1,5 +1,6 @@
 package ru.bastard.culinary.fluid;
 
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -49,6 +50,18 @@ public class ModFluids {
                     .levelDecreasePerBlock(5)
                     .slopeFindDistance(1)
                     .block(ModBlocks.MOLASSES_FLUID_BLOCK).bucket(ModItems.MOLASSES_BUCKET);
+
+    public static final RegistryObject<FlowingFluid> SOURCE_HONEY = FLUIDS.register("honey_fluid",
+            () -> new ForgeFlowingFluid.Source(ModFluids.HONEY_PROPERTIES));
+
+    public static final RegistryObject<FlowingFluid> FLOWING_HONEY = FLUIDS.register("flowing_honey_fluid",
+            () -> new ForgeFlowingFluid.Flowing(ModFluids.HONEY_PROPERTIES));
+
+    public static final ForgeFlowingFluid.Properties HONEY_PROPERTIES = new ForgeFlowingFluid
+            .Properties(ModFluidTypes.HONEY_FLUID_TYPE, SOURCE_HONEY, FLOWING_HONEY)
+            .levelDecreasePerBlock(6)
+            .slopeFindDistance(1)
+            .block(ModBlocks.HONEY_FLUID_BLOCK).bucket(ModItems.HONEY_BUCKET);
 
 
     public static void register(IEventBus bus) {

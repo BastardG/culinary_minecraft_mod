@@ -61,11 +61,12 @@ public class FootTub extends BaseEntityBlock {
                     if (hand == InteractionHand.MAIN_HAND) {
                         if (!itemInHand.isEmpty()) {
                             if (itemInHand.is(Items.GLASS_BOTTLE)) {
-                                Fluid f = fte.getFluid().getFluid();
+                                Fluid f = fte.getFluid(0).getFluid();
                                 InteractionResult res = fte.processStoredFluidUseBottle();
                                 if(res == InteractionResult.SUCCESS) {
                                     itemInHand.shrink(1);
-                                    player.addItem(FluidUtil.fluidToBottlesMap.get(f).getDefaultInstance());
+                                    //TODO: Вернуть наливание жидкости в бутылку
+                                    //player.addItem(FluidUtil.fluidToBottlesMap.get(f).getDefaultInstance());
                                 }
                                 return InteractionResult.SUCCESS;
                             } else {

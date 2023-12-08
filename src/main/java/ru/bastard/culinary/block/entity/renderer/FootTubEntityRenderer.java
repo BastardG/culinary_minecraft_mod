@@ -17,7 +17,6 @@ import org.joml.Matrix3f;
 import org.joml.Matrix4f;
 import org.joml.Quaternionf;
 import ru.bastard.culinary.block.entity.FootTubEntity;
-import ru.bastard.culinary.block.entity.PotEntity;
 
 import java.awt.*;
 
@@ -37,13 +36,13 @@ public class FootTubEntityRenderer implements BlockEntityRenderer<FootTubEntity>
 
     @Override
     public void render(FootTubEntity blockEntity, float partialTick, PoseStack poseStack, MultiBufferSource multiBufferSource, int light, int overlay) {
-        if (blockEntity.isTankEmpty()) return;
+        if (blockEntity.isTanksEmpty()) return;
         float baseOffset = 4.0F / 16F;
         float maxFluidHeight = 15.0F / 16F;
 
-        FluidStack inputFluidStack = blockEntity.getFluid();
+        FluidStack inputFluidStack = blockEntity.getFluid(0);
 
-        float inputCapacity = blockEntity.getCapacity();
+        float inputCapacity = blockEntity.getCapacity(0);
         float inputAmount = inputFluidStack.getAmount();
         float inputFluidHeight = baseOffset + (maxFluidHeight - baseOffset) * inputAmount / inputCapacity;
 

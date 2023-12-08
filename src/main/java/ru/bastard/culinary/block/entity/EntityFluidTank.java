@@ -4,14 +4,16 @@ import net.minecraftforge.fluids.FluidStack;
 
 public interface EntityFluidTank {
 
-    boolean isTankEmpty();
-    void emptyTank();
-    void fillTank(int amount);
-    void fillTank(FluidStack fluidStack);
-    void fillTankFull(FluidStack fluidStack);
-    void setFluid(FluidStack fluidStack);
-    FluidStack getFluid();
-    void drain(int amount);
-    int getCapacity();
+    boolean isTanksEmpty();
+    boolean isTankEmpty(int tankId);
+    void emptyTanks();
+    void emptyTank(int tankId);
+    void fillTank(int tankId, int amount);
+    void fillTank(int tankId, FluidStack fluidStack);
+    void fillTankFull(int tankId, FluidStack fluidStack);
+    void setFluid(int tankId, FluidStack fluidStack);
+    FluidStack getFluid(int tankId);
+    void drain(int tankId, int amount);
+    int getCapacity(int tankId);
 
 }

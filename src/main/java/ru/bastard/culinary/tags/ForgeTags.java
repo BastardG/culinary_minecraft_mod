@@ -6,6 +6,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.registries.ForgeRegistries;
 
+import javax.swing.text.html.HTML;
+
 public class ForgeTags {
 
     public static final TagKey<Item> TOOLS = forgeItemTag("tools");
@@ -15,8 +17,13 @@ public class ForgeTags {
     public static final TagKey<Item> TOOLS_SHOVELS = forgeItemTag("tools/shovels");
     public static final TagKey<Item> TOOLS_HOES = forgeItemTag("tools/hoes");
 
+    public static final TagKey<Item> HOLDING_FLUID = forgeItemTag("fluid/holding_fluid");
+
     public static final TagKey<Item> SQUEEZABLE = forgeItemTag("food/squeezable");
     public static final TagKey<Item> SUGAR = forgeItemTag("food/sugars");
+    public static final TagKey<Item> BERRIES = forgeItemTag("food/berries");
+
+    public static final TagKey<Item> PLANKS = forgeItemTag("planks");
 
     private static TagKey<Block> forgeBlockTag(String path) {
         return TagKey.create(ForgeRegistries.BLOCKS.getRegistryKey(), new ResourceLocation("forge", path));

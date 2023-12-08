@@ -23,6 +23,7 @@ import ru.bastard.culinary.block.entity.ModBlockEntities;
 import ru.bastard.culinary.crafting.BBrewingRecipe;
 import ru.bastard.culinary.crafting.ModRecipeSerializers;
 import ru.bastard.culinary.effect.ModEffects;
+import ru.bastard.culinary.event.ToTestSomeStuff;
 import ru.bastard.culinary.fluid.ModFluidTypes;
 import ru.bastard.culinary.fluid.ModFluids;
 import ru.bastard.culinary.item.ModCreativeModeTabs;

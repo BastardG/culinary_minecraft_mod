@@ -7,6 +7,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.network.NetworkEvent;
 import ru.bastard.culinary.block.entity.CuttingBoardEntity;
+import ru.bastard.culinary.block.entity.FermentingBarrelEntity;
 import ru.bastard.culinary.block.entity.FootTubEntity;
 
 import java.util.ArrayList;
@@ -58,6 +59,9 @@ public class ItemStackSyncS2CPacket {
                 entity.setItemHandler(stackHandler);
             }
             if (Minecraft.getInstance().level.getBlockEntity(pos) instanceof FootTubEntity entity) {
+                entity.setItemHandler(stackHandler);
+            }
+            if (Minecraft.getInstance().level.getBlockEntity(pos) instanceof FermentingBarrelEntity entity) {
                 entity.setItemHandler(stackHandler);
             }
         });

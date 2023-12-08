@@ -57,8 +57,8 @@ public class Pot extends BaseEntityBlock {
                     }
                     if (!itemInHand.isEmpty()) {
                         if (itemInHand.getItem() instanceof BucketItem bucket) {
-                            if (potEntity.isTankEmpty()) {
-                                potEntity.fillTank(new FluidStack(bucket.getFluid(), 1000));
+                            if (potEntity.isTanksEmpty()) {
+                                potEntity.fillTank(0, new FluidStack(bucket.getFluid(), 1000));
                             }
                             return InteractionResult.SUCCESS;
                         }
@@ -99,7 +99,6 @@ public class Pot extends BaseEntityBlock {
         return Shapes.join(SHAPE, INSIDE, BooleanOp.AND);
     }
 
-    @Nullable
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
@@ -130,13 +129,11 @@ public class Pot extends BaseEntityBlock {
         super.onRemove(state, level, pos, newState, isMoving);
     }
 
-    @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return new PotEntity(pos, state);
     }
 
-    @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
         return createTickerHelper(type, ModBlockEntities.POT.get(), PotEntity::tick);
